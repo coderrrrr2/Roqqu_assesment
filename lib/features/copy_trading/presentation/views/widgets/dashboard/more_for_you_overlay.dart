@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/routes/routes.dart';
+import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
 import 'package:roqqu_assesment/shared/utils/app_colors.dart';
 import 'package:roqqu_assesment/shared/utils/assets.dart';
 import 'package:roqqu_assesment/shared/widgets/app_text.dart';
@@ -113,7 +115,9 @@ class _OverlayContent extends StatelessWidget {
                 icon: trade,
                 label: 'Copy trading',
                 hasNewBadge: true,
-                onTap: () {},
+                onTap: () {
+                  AppNavigator.pushRoute(CopyTradingRoutes.copyTrading);
+                },
               ),
             ],
           ),

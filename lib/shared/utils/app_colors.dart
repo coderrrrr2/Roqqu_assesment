@@ -13,12 +13,15 @@ class AppColors {
 
   static const red = Color.fromRGBO(255, 42, 84, 1.0);
   static const red2 = Color.fromRGBO(255, 85, 74, 0.08);
-  static const backgroundColor = Color.fromRGBO(28, 33, 39, 1);
+  static const backgroundColor = Color(0xFF1C2127);
+  static const backgroundColor2 = Color.fromRGBO(42, 47, 54, 1);
+  static const backgroundColor3 = Color.fromRGBO(28, 33, 39, 1);
   static const grey = Color.fromRGBO(167, 177, 188, 1);
   static const grey2 = Color.fromRGBO(32, 37, 43, 1);
   static const grey3 = Color.fromRGBO(38, 41, 50, 1);
   static const grey4 = Color.fromRGBO(118, 118, 128, 0.12);
   static const grey5 = Color.fromRGBO(167, 177, 188, 1);
+  static const grey6 = Color.fromRGBO(32, 37, 43, 1);
   static const skyBlue = Color.fromRGBO(133, 209, 240, 1);
   static const skyBlue2 = Color.fromRGBO(171, 226, 243, 1);
   static const mintTeal = Color.fromRGBO(189, 228, 229, 1);
@@ -28,7 +31,11 @@ class AppColors {
   static const periwinkleBlue = Color.fromRGBO(201, 210, 251, 1);
   static const lighBlue = Color.fromRGBO(39, 100, 255, 1);
   static const lighBlue2 = Color.fromRGBO(29, 53, 115, 1);
-
   static const opaqueYellow = Color.fromRGBO(222, 155, 9, 0.08);
   static const yellow = Color.fromRGBO(247, 144, 9, 1);
+  static const skyBlue3 = Color.fromRGBO(133, 209, 240, 1);
+  static const successGreen = Color.fromRGBO(23, 178, 106, 1);
+  static const pink = Color.fromRGBO(192, 207, 254, 1);
+  static const pinkPurple = Color.fromRGBO(243, 223, 244, 1);
+  static const lightPink = Color.fromRGBO(249, 216, 229, 1);
 }

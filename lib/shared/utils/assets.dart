@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 //SVG
-
 String historyIcon = 'history'.svg;
 String homeIcon = 'home'.svg;
 String walletIcon = 'wallet'.svg;
@@ -17,10 +16,16 @@ String searchIcon = 'search_icon'.svg;
 String notificationIcon = 'notification'.svg;
 String notificationTwoIcon = 'notification_two'.svg;
 String trade = 'trade'.svg;
+String dashBoardIcon = 'dashboard_icon'.svg;
+String proTraderIcon = 'pro_trader_icon'.svg;
+String badge = 'badge'.svg;
+String people = 'people'.svg;
 
 //PNG
 String crown = 'crown'.png;
 String usFlag = 'us_flag'.png;
+String doLessWinMore = 'do_less_win_more_image'.png;
+String copyProTraders = 'copy_pro_traders_image'.png;
 
 extension ImageExtension on String {
   String get png => 'assets/pngs/$this.png';

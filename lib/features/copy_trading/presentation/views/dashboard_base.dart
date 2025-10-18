@@ -137,7 +137,7 @@ class DashboardBase extends HookConsumerWidget {
           child: AnimatedRotation(
             turns: isActive ? 0.125 : 0,
             duration: const Duration(milliseconds: 200),
-            child: Icon(Icons.close, color: AppColors.white, size: 28.sp),
+            child: Icon(Icons.add, color: AppColors.white, size: 28.sp),
           ),
         ),
       ),

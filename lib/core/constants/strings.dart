@@ -1,7 +1,5 @@
 import 'package:roqqu_assesment/shared/utils/assets.dart';
 
-/// Centralized string constants used throughout the app.
-/// Group related strings using sections for maintainability.
 class AppStrings {
   static const String seeMore = "See more";
   static const String seeAll = "See all";
@@ -48,6 +46,76 @@ class AppStrings {
   static const String aum = "AUM:";
   static const String currentFollowers = "500";
   static const dollarSign = "\$";
+  static const String importantMessage = 'Important message!';
+  static const String copyTradeWarningMessage =
+      'Don\'t invest unless you\'re prepared and understand the risks involved in copy trading.';
+  static const String learnMore = 'Learn more';
+  static const String aboutTheRisks = ' about the risks.';
+  static const String checkBoxAgree =
+      'Check this box to agree to Roqqu\'s copy trading ';
+  static const String policy = 'policy';
+  static const String proceedToCopyTrade = 'Proceed to copy trade';
+  static const String risksInvolvedInCopyTrading =
+      'Risks involved in copy trading';
+  static const String risksInvolvedSubtitle =
+      'Please make sure you read the following risks involved in copy trading before making a decision.';
+  static const String iHaveReadTheRisks = 'I have read the risks';
+
+  // Risk Items
+  static const String marketRisks = 'Market risks';
+  static const String marketRisksDescription =
+      'All investments carry risks, including potential loss of capital.';
+
+  static const String dependencyOnOthers = 'Dependency on others';
+  static const String dependencyOnOthersDescription =
+      'Your investment performance depends entirely on the trader you\'re copying. Poor decisions by them directly affect your portfolio.';
+
+  static const String mismatchedRiskProfiles = 'Mismatched risk profiles';
+  static const String mismatchedRiskProfilesDescription =
+      'The trader\'s risk tolerance may not align with yours, leading to trades that are too aggressive or conservative for your comfort level.';
+
+  static const String controlAndUnderstanding = 'Control and understanding';
+  static const String controlAndUnderstandingDescription =
+      'You may not fully understand the strategies being used, and you have limited control over individual trades.';
+
+  static const String emotionalDecisions = 'Emotional decisions';
+  static const String emotionalDecisionsDescription =
+      'Following others can lead to impulsive decisions, especially during market volatility.';
+
+  static const String costsInvolved = 'Costs involved';
+  static const String costsInvolvedDescription =
+      'Copy trading may involve fees that reduce your overall returns.';
+
+  static const String diversify = 'Diversify';
+  static const String diversifyDescription =
+      'Copying a single trader may lead to a lack of diversification in your portfolio.';
+
+  static const String executionRisks = 'Execution risks';
+  static const String executionRisksDescription =
+      'Delays or errors in copying trades can result in different outcomes than the original trader.';
+
+  static const String copyTradingInvestmentsComplex =
+      'Copy trading investments can be complex';
+  static const String copyTradingInvestmentsComplexDescription =
+      'Understanding the full scope of strategies and their risks requires careful research.';
+
+  static const String enterAmount = 'Enter amount';
+  static const String confirmTransaction = 'Confirm transaction';
+  static const String transactionFeeDisplay = 'Transaction fee (1%) - 1.00USD';
+  static const String usdBalance = 'USD Balance';
+  static const String useMax = 'Use Max';
+  static const String continues = 'Continue';
+  static const String copyTradingAmount = 'Copy trading amount';
+  static const String proTrader = 'PRO trader';
+  static const String whatYouGet = 'What you get';
+  static const String transactionFee = 'Transaction fee';
+  static const String confirmPinSubtitle =
+      'Input your 6 digit transaction PIN to confir\nyour transaction and authenticate your request';
+  static const String forgotPin = 'Forgot PIN?';
+  static const goToDashBoard = 'Go to dashboard';
+  static const String copyTradeSuccess = 'Trade copied successfully';
+  static String successfullyCopied(String traderName) =>
+      'You have successfully copied $traderName trade';
 }
 
 final List<Map<String, String>> tiles = [

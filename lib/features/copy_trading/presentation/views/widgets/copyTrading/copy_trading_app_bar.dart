@@ -26,6 +26,7 @@ class CopyTradingAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      forceMaterialTransparency: true,
       backgroundColor: backgroundColor ?? Colors.transparent,
       elevation: elevation,
       leading:

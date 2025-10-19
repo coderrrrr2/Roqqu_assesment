@@ -1,7 +1,7 @@
 import 'package:roqqu_assesment/core/constants/strings.dart' show AppStrings;
 import 'package:roqqu_assesment/features/copy_trading/data/models/dashboard_card_data.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/pro_trader.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
 
 final List<DashboardCardData> dashboardCards = [
   DashboardCardData(
@@ -15,36 +15,78 @@ final List<DashboardCardData> dashboardCards = [
     icon: proTraderIcon,
   ),
 ];
-
 final List<ProTrader> mockTraders = [
   ProTrader(
-    name: "Jay isisou",
+    name: "Jay Isisou",
     initials: "JI",
-    avatarColorHex: "4CAF50", // Green/Lime
+    avatarColorHex: "4CAF50",
     roi: 120.42,
     totalPnl: 38667.29,
     winRate: 100,
     aum: 38667.29,
-    chartData: [0, 50, 10, 80, 20, 90, 40, 100],
+    chartData: [120, 121, 123, 122, 124, 126],
+    chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
+    assetAllocations: {"BTCUSDT": 70, "ETHUSDT": 20, "SOLUSDT": 10},
+    holdingPeriods: [
+      {"x": 0.5, "y": 64200, "profit": 1},
+      {"x": 1.5, "y": 64100, "profit": 0},
+      {"x": 1.8, "y": 64300, "profit": 1},
+      {"x": 2.5, "y": 64250, "profit": 1},
+      {"x": 3.2, "y": 64150, "profit": 0},
+    ],
+    tradingDays: 43,
+    profitShare: 15.0,
+    totalOrders: 56,
+    copiers: 500,
+    isCertified: true,
+    certifications: ["High win rate", "Great risk control"],
   ),
   ProTrader(
-    name: "Laura okobi",
+    name: "Laura Okobi",
     initials: "LO",
-    avatarColorHex: "FF9800", // Orange
-    roi: 120.42,
-    totalPnl: 38667.29,
-    winRate: 100,
-    aum: 38667.29,
-    chartData: [100, 30, 70, 0, 50, 60, 20, 90],
+    avatarColorHex: "FF9800",
+    roi: 118.65,
+    totalPnl: 31244.50,
+    winRate: 97,
+    aum: 32000.00,
+    chartData: [118, 119, 117, 118.5, 119.5, 120],
+    chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
+    assetAllocations: {"BTCUSDT": 60, "ETHUSDT": 30, "ADAUSDT": 10},
+    holdingPeriods: [
+      {"x": 0.5, "y": 64150, "profit": 1},
+      {"x": 1.5, "y": 64000, "profit": 0},
+      {"x": 2.0, "y": 64250, "profit": 1},
+      {"x": 3.0, "y": 64100, "profit": 0},
+    ],
+    tradingDays: 38,
+    profitShare: 12.5,
+    totalOrders: 49,
+    copiers: 420,
+    isCertified: true,
+    certifications: ["High win rate", "Consistent returns"],
   ),
   ProTrader(
-    name: "BTC master",
+    name: "BTC Master",
     initials: "BM",
-    avatarColorHex: "2196F3", // Blue
-    roi: 120.42,
-    totalPnl: 38667.29,
-    winRate: 100,
-    aum: 38667.29,
-    chartData: [50, 10, 80, 40, 100, 20, 90, 70],
+    avatarColorHex: "2196F3",
+    roi: 125.73,
+    totalPnl: 41250.75,
+    winRate: 98,
+    aum: 45000.00,
+    chartData: [122, 123, 124, 125, 126, 127],
+    chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
+    assetAllocations: {"BTCUSDT": 80, "ETHUSDT": 15, "BNBUSDT": 5},
+    holdingPeriods: [
+      {"x": 0.5, "y": 64000, "profit": 1},
+      {"x": 1.5, "y": 64100, "profit": 1},
+      {"x": 2.5, "y": 64200, "profit": 0},
+      {"x": 3.5, "y": 64300, "profit": 1},
+    ],
+    tradingDays: 56,
+    profitShare: 18.0,
+    totalOrders: 68,
+    copiers: 600,
+    isCertified: true,
+    certifications: ["High win rate", "Low drawdown", "Great risk control"],
   ),
 ];

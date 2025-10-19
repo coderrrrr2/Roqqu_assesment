@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/dashboard_view.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/more_for_you_overlay.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/dashboard_view.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/more_for_you_overlay.dart';
 import 'package:roqqu_assesment/features/navigation/nav_bar_viewmodel.dart';
 import 'package:roqqu_assesment/shared/utils/app_colors.dart';
 import 'package:roqqu_assesment/shared/utils/assets.dart';
@@ -30,12 +30,7 @@ class DashboardBase extends HookConsumerWidget {
         children: [
           IndexedStack(
             index: navBarIndex == 4 ? 0 : navBarIndex,
-            children: const [
-              DashboardView(),
-              DashboardView(),
-              DashboardView(),
-              DashboardView(),
-            ],
+            children: const [HomeView(), HomeView(), HomeView(), HomeView()],
           ),
 
           Align(

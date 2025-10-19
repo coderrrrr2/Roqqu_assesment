@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roqqu_assesment/core/constants/app_spacing.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
@@ -11,7 +12,9 @@ class DashboardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.horizontalValue,
+      ).copyWith(top: 16.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -59,7 +62,7 @@ class DashboardHeader extends StatelessWidget {
           AppText(
             text: AppStrings.crypto,
             color: AppColors.black,
-            variant: TextVariant.interMedium,
+            variant: TextVariant.interBold,
             fontSize: 14.sp,
           ),
           addWidth(8.w),

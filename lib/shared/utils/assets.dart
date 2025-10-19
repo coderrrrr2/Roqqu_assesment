@@ -20,12 +20,20 @@ String dashBoardIcon = 'dashboard_icon'.svg;
 String proTraderIcon = 'pro_trader_icon'.svg;
 String badge = 'badge'.svg;
 String people = 'people'.svg;
+String appIcon = 'app_icon'.svg;
+String verified = 'verified'.svg;
+String yellowUpwardBar = 'yellow_upward_bar'.svg;
+String greenChart = 'green_chart'.svg;
+String biometrics = 'biometrics'.svg;
 
 //PNG
 String crown = 'crown'.png;
 String usFlag = 'us_flag'.png;
 String doLessWinMore = 'do_less_win_more_image'.png;
 String copyProTraders = 'copy_pro_traders_image'.png;
+String importantMessage = 'important_message'.png;
+String pinLock = 'pin_lock'.png;
+String successCoin = 'success_coin'.png;
 
 extension ImageExtension on String {
   String get png => 'assets/pngs/$this.png';

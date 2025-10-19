@@ -9,7 +9,8 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/routes/routes
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_app_bar.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/risk_profile_card.dart';
 import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class RiskLevelSelectionView extends HookWidget {
   const RiskLevelSelectionView({super.key});

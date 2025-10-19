@@ -2,13 +2,22 @@ class ProTrader {
   final String name;
   final String initials;
   final String avatarColorHex;
-  final double roi; // Return on Investment (e.g., 120.42)
-  final double totalPnl; // Total Profit and Loss
-  final int winRate; // Percentage (e.g., 100)
-  final double aum; // Assets Under Management
-  final List<double> chartData; // Mock data points for the line chart
+  final double roi;
+  final double totalPnl;
+  final int winRate;
+  final double aum;
+  final List<double> chartData;
+  final List<String> chartDates;
+  final Map<String, double> assetAllocations;
+  final List<Map<String, double>> holdingPeriods;
+  final int tradingDays;
+  final double profitShare;
+  final int totalOrders;
+  final int copiers;
+  final bool isCertified;
+  final List<String> certifications;
 
-  ProTrader({
+  const ProTrader({
     required this.name,
     required this.initials,
     required this.avatarColorHex,
@@ -17,5 +26,14 @@ class ProTrader {
     required this.winRate,
     required this.aum,
     required this.chartData,
+    required this.chartDates,
+    required this.assetAllocations,
+    required this.holdingPeriods,
+    required this.tradingDays,
+    required this.profitShare,
+    required this.totalOrders,
+    required this.copiers,
+    required this.isCertified,
+    required this.certifications,
   });
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class DashboardActionPanel extends StatelessWidget {
   const DashboardActionPanel({super.key});
@@ -48,7 +49,7 @@ class DashboardActionPanel extends StatelessWidget {
             ),
             child: Center(
               child: AppText(
-                variant: TextVariant.interMedium,
+                variant: TextVariant.interBold,
                 text: AppStrings.seeMore,
                 color: AppColors.skyBlue,
                 fontSize: 12.sp,

@@ -43,16 +43,18 @@ class _AppButtonState extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
     final isLargeScreen = getScreenWidth(context) > 600;
-
     return Center(
       child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(72, 59, 235, 1),
-              Color.fromRGBO(120, 71, 225, 1),
-              Color.fromRGBO(221, 86, 141, 1),
-            ],
+            colors:
+                [
+                      const Color.fromRGBO(72, 59, 235, 1),
+                      const Color.fromRGBO(120, 71, 225, 1),
+                      const Color.fromRGBO(221, 86, 141, 1),
+                    ]
+                    .map((c) => widget.isEnabled ? c : c.withOpacity(0.4))
+                    .toList(),
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -70,7 +72,7 @@ class _AppButtonState extends State<AppButton> {
             ),
             minimumSize:
                 widget.maxButtonSize ??
-                (widget.buttonSize ?? Size(370.w, 40.h)),
+                (widget.buttonSize ?? Size(370.w, 48.h)),
             maximumSize: widget.maxButtonSize,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -88,7 +90,7 @@ class _AppButtonState extends State<AppButton> {
                     text: widget.text,
                     color:
                         widget.textColor ??
-                        (widget.isEnabled ? null : Colors.white),
+                        (widget.isEnabled ? Colors.white : Colors.white70),
                     fontSize:
                         widget.textSize ?? (isLargeScreen ? 12.sp : 15.sp),
                     fontWeight: widget.fontWeight ?? FontWeight.bold,

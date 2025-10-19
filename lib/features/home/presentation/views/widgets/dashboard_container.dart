@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/core/constants/app_spacing.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/balance_text.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/copy_trading_banner.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/dashboard_action_panel.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/stay_updated_tile.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/balance_text.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/copy_trading_banner.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/dashboard_action_panel.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/stay_updated_tile.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -123,7 +123,7 @@ class DashboardContainer extends HookWidget {
                   ),
                   AppText(
                     text: AppStrings.seeAll,
-                    variant: TextVariant.interMedium,
+                    variant: TextVariant.interBold,
                     color: AppColors.skyBlue,
                     fontSize: 12.sp,
                   ),

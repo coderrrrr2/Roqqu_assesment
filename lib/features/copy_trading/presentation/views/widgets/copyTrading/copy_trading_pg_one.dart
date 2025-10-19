@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class CopyTradingPageOne extends StatelessWidget {
   const CopyTradingPageOne({super.key});
@@ -33,7 +34,7 @@ class CopyTradingPageOne extends StatelessWidget {
           addHeight(75.h),
           Expanded(
             child: Center(
-              child: ImageAsset(doLessWinMore, width: 290.w, height: 290.h),
+              child: ImageAsset(copyProTraders, width: 290.w, height: 290.h),
             ),
           ),
         ],

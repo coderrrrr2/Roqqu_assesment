@@ -7,7 +7,8 @@ import 'package:roqqu_assesment/features/copy_trading/data/mock.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_app_bar.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_dashboard_card.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/pro_trader_item.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class CopyTradingDashboard extends StatelessWidget {
   const CopyTradingDashboard({super.key});

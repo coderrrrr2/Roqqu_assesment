@@ -19,6 +19,7 @@ class AppColumn extends StatefulWidget {
   final List<Widget> children;
   final Widget? bottomNavBar;
   final Widget? drawer;
+  final PreferredSizeWidget? appBar;
 
   const AppColumn({
     super.key,
@@ -37,6 +38,7 @@ class AppColumn extends StatefulWidget {
     this.drawer,
     this.bottomNavBar,
     this.backgroundColor,
+    this.appBar,
   });
 
   @override
@@ -57,15 +59,16 @@ class _AppColumnState extends State<AppColumn> {
       children: widget.children,
     );
 
-    return Scaffold(
-      backgroundColor: widget.backgroundColor,
-      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-      drawer: widget.drawer,
-      body: GestureDetector(
-        // onTap: () {
-        //   removeFocus(context);
-        // },
-        child: Stack(
+    return GestureDetector(
+      onTap: () {
+        removeFocus(context);
+      },
+      child: Scaffold(
+        backgroundColor: widget.backgroundColor,
+        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+        drawer: widget.drawer,
+        appBar: widget.appBar,
+        body: Stack(
           children: [
             widget.isScrollable
                 ? SafeArea(
@@ -170,8 +173,8 @@ class _AppColumnState extends State<AppColumn> {
               ),
           ],
         ),
+        bottomNavigationBar: widget.bottomNavBar,
       ),
-      bottomNavigationBar: widget.bottomNavBar,
     );
   }
 }

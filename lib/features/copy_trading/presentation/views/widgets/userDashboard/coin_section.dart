@@ -39,7 +39,7 @@ class CoinSection extends StatelessWidget {
             child: Row(
               children: [
                 SvgImage(bitCoinIcon, width: 20.w, height: 20.w),
-                addWidth(5.w),
+                addWidth(8.w),
                 Row(
                   children: [
                     AppText(

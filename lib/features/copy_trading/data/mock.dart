@@ -112,7 +112,7 @@ final List<ProTrader> mockTraders = [
       {"x": 3.0, "y": 64100, "profit": 0},
     ],
     tradingDays: 38,
-    profitShare: 12.5,
+    profitShare: 12,
     totalOrders: 49,
     copiers: 420,
     isCertified: true,

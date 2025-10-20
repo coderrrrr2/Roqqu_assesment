@@ -121,6 +121,7 @@ class AppStrings {
   static const String totalVolume = 'Total Volume';
   static const String tradingProfit = 'Trading Profit';
   static const String searchForTraders = 'Search for PRO traders';
+  static const String tradingDetails = 'Trading Details';
 }
 
 final List<Map<String, String>> tiles = [

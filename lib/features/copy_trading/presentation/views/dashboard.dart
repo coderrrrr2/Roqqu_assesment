@@ -82,7 +82,9 @@ class CopyTradingDashboard extends StatelessWidget {
 
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24.w,
+                ).copyWith(bottom: 6.h, top: 16.h),
                 child: AppText(
                   text: AppStrings.proTraders,
                   fontSize: 16.sp,

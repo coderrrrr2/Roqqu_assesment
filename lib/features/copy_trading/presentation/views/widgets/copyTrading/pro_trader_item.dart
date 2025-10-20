@@ -54,9 +54,16 @@ class ProTraderItem extends StatelessWidget {
                         width: 38.w,
                         height: 38.w,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(92, 138, 255, 0.14),
+                          color: Color(
+                            int.parse('0xFF${trader.avatarColorHex}'),
+                          ).withValues(alpha: 0.5),
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.lighBlue),
+                          border: Border.all(
+                            color: Color(
+                              int.parse('0xFF${trader.avatarColorHex}'),
+                            ),
+                            width: 2.r,
+                          ),
                         ),
                         child: Stack(
                           clipBehavior: Clip.none,
@@ -70,7 +77,7 @@ class ProTraderItem extends StatelessWidget {
                               ),
                             ),
                             Positioned(
-                              bottom: -10.h,
+                              bottom: -12.h,
                               child: SvgImage(
                                 badge,
                                 width: 14.w,
@@ -95,7 +102,7 @@ class ProTraderItem extends StatelessWidget {
                               SvgImage(people, width: 12.w, height: 12.h),
                               addWidth(4.w),
                               AppText(
-                                text: '500',
+                                text: trader.copiers.toString(),
                                 fontSize: 12.sp,
                                 variant: TextVariant.interBold,
                                 color: AppColors.skyBlue,

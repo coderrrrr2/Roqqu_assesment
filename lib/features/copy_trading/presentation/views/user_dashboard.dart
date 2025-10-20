@@ -43,6 +43,7 @@ class _UserDashboardViewState extends State<UserDashboardView> {
               CopyTradingAppBar(
                 title: AppStrings.myDashboard,
                 showBackButton: true,
+                isBackButtonPadded: false,
               ),
               addHeight(25.h),
               traderProfile(widget.args.trader),

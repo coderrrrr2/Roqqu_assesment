@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/core/constants/app_spacing.dart';
+import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/pro_trader.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/routes/routes.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/enter_amount_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_app_bar.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/warning_bottom_sheet.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/risk_involved_bottom_sheet.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/asset_allocation_widget.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trading_all_trades_tab.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trading_chart_tab.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trading_copiers_tab.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trading_stats_tab.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/certified_badge.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/details_chart.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/holding_period.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/roi_chart.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/tabs.dart';
-import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
@@ -34,111 +30,69 @@ class TradingDetailsView extends StatefulWidget {
 
 class _TradingDetailsViewState extends State<TradingDetailsView> {
   int selectedTabIndex = 0;
-  String selectedPeriod = '7 days';
+  final PageController pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
 
-      body: Column(
-        children: [
-          addHeight(17.h),
-          CopyTradingAppBar(title: 'Trading Details', showBackButton: true),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpacing.horizontalValue,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.horizontalValue),
+          child: Column(
+            children: [
+              addHeight(17.h),
+              CopyTradingAppBar(
+                title: AppStrings.tradingDetails,
+                showBackButton: true,
+                isBackButtonPadded: false,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              addHeight(25.h),
+              traderProfile(widget.args.trader),
+              addHeight(22.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  addHeight(25.h),
-                  traderProfile(widget.args.trader),
-                  addHeight(20.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      statItem(
-                        '${widget.args.trader.tradingDays} trading days',
-                      ),
-                      statItem(
-                        '${widget.args.trader.profitShare}% profit-share',
-                      ),
-                      statItem(
-                        '${widget.args.trader.totalOrders} total orders',
-                      ),
-                    ],
-                  ),
-
-                  addHeight(16.h),
-
-                  TraderDetailsCertifiedBadge(
-                    isCertified: widget.args.trader.isCertified,
-                    certifications: widget.args.trader.certifications,
-                  ),
-                  addHeight(5.h),
-
-                  TraderDetailsTabs(
-                    selectedIndex: selectedTabIndex,
-                    onTabSelected: (index) {
-                      setState(() => selectedTabIndex = index);
-                    },
-                  ),
-
-                  TraderDetailsRoiChart(
-                    trader: widget.args.trader,
-                    selectedPeriod: selectedPeriod,
-                  ),
-                  addHeight(10.h),
-
-                  AppButton(
-                    borderRadius: BorderRadius.circular(8.r),
-
-                    onPressed: () {
-                      AppAlert.showCustomBottomSheet(
-                        context: context,
-                        content: CopyTradeWarningBottomSheet(
-                          onProceed: () {
-                            AppAlert.showCustomBottomSheet(
-                              context: context,
-                              content: RisksInvolvedBottomSheet(
-                                onConfirm: () {
-                                  AppNavigator.pushRoute(
-                                    CopyTradingRoutes.enterAmount,
-                                    arguments: EnterAmountViewArgs(
-                                      trader: widget.args.trader,
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    text: 'Copy trade',
-                    buttonSize: Size(double.infinity, 48.h),
-                    textSize: 16.sp,
-                  ),
-                  addHeight(10.h),
-
-                  TraderDetailsChart(trader: widget.args.trader),
-                  addHeight(5.h),
-
-                  TraderDetailsAssetAllocationWidget(
-                    selectedPeriod: selectedPeriod,
-                    trader: widget.args.trader,
-                  ),
-                  addHeight(5.h),
-
-                  TraderDetailsHoldingPeriodWidget(trader: widget.args.trader),
-                  addHeight(40.h),
+                  statItem('${widget.args.trader.tradingDays} trading days'),
+                  statItem('${widget.args.trader.profitShare}% profit-share'),
+                  statItem('${widget.args.trader.totalOrders} total orders'),
                 ],
               ),
-            ),
+
+              addHeight(16.h),
+
+              TraderDetailsCertifiedBadge(
+                isCertified: widget.args.trader.isCertified,
+                certifications: widget.args.trader.certifications,
+              ),
+              addHeight(5.h),
+
+              TraderDetailsTabs(
+                selectedIndex: selectedTabIndex,
+                onTabSelected: (index) {
+                  pageController.jumpToPage(index);
+                },
+              ),
+
+              Expanded(
+                child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    setState(() => selectedTabIndex = index);
+                  },
+                  children: [
+                    TradingDetailsChartTab(trader: widget.args.trader),
+                    TradingStatsTab(trader: widget.args.trader),
+                    TradingAllTradesTab(trader: widget.args.trader),
+                    TradingCopiersTab(trader: widget.args.trader),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -164,12 +118,17 @@ class _TradingDetailsViewState extends State<TradingDetailsView> {
     return Row(
       children: [
         Container(
-          width: 48.w,
-          height: 48.w,
+          width: 51.2.w,
+          height: 51.2.w,
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(92, 138, 255, 0.14),
+            color: Color(
+              int.parse('0xFF${trader.avatarColorHex}'),
+            ).withValues(alpha: 0.5),
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.lighBlue, width: 2.r),
+            border: Border.all(
+              color: Color(int.parse('0xFF${trader.avatarColorHex}')),
+              width: 2.r,
+            ),
           ),
           child: Stack(
             clipBehavior: Clip.none,
@@ -178,14 +137,14 @@ class _TradingDetailsViewState extends State<TradingDetailsView> {
               Center(
                 child: AppText(
                   text: StringUtils.getInitials(trader.name),
-                  fontSize: 18.sp,
+                  fontSize: 16.sp,
                   variant: TextVariant.interBold,
                 ),
               ),
               Positioned(
-                bottom: -4.h,
-                right: -2.w,
-                child: SvgImage(badge, width: 16.w, height: 22.h),
+                bottom: -14.h,
+                right: 3.w,
+                child: SvgImage(badge, width: 18.w, height: 25.h),
               ),
             ],
           ),
@@ -197,9 +156,9 @@ class _TradingDetailsViewState extends State<TradingDetailsView> {
             AppText(
               text: trader.name,
               fontSize: 18.sp,
-              variant: TextVariant.interRegular,
+              variant: TextVariant.encodeBold,
             ),
-            addHeight(4.h),
+            addHeight(8.h),
             Row(
               children: [
                 SvgImage(people, width: 14.w, height: 14.h),

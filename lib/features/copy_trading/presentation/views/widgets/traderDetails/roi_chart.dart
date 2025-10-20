@@ -13,7 +13,7 @@ class TraderDetailsRoiChart extends StatelessWidget {
   const TraderDetailsRoiChart({
     super.key,
     required this.trader,
-    required this.selectedPeriod,
+    this.selectedPeriod = '7 days',
   });
 
   Widget periodDropdown() {

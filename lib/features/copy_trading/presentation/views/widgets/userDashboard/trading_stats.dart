@@ -85,7 +85,7 @@ class TradingStatisticsSection extends StatelessWidget {
             horizontal: AppSpacing.horizontalValue,
             vertical: 10.h,
           ),
-          leading: SvgImage(bitCoinIcon, width: 32.w, height: 32.h),
+          leading: SvgImage(bitCoinAnalytics, width: 32.w, height: 32.h),
           title: AppText(
             text: title,
             fontSize: 12.sp,

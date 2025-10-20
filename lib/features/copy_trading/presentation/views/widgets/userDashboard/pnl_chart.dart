@@ -1,47 +1,27 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/pro_trader.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/period_drop_down.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
-class TraderDetailsRoiChart extends StatelessWidget {
+class UserDashboardPnlChart extends StatelessWidget {
   final ProTrader trader;
   final String selectedPeriod;
 
-  const TraderDetailsRoiChart({
+  const UserDashboardPnlChart({
     super.key,
     required this.trader,
     required this.selectedPeriod,
   });
 
-  Widget periodDropdown() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-      decoration: BoxDecoration(
-        color: AppColors.backgroundColor,
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: AppColors.grey3, width: 1.r),
-      ),
-      child: Row(
-        children: [
-          AppText(
-            text: selectedPeriod,
-            fontSize: 12.sp,
-            variant: TextVariant.interRegular,
-          ),
-          addWidth(4.w),
-          Icon(Icons.keyboard_arrow_down, color: AppColors.white, size: 16.sp),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final double leftReserved = 50.w;
-    final double bottomReserved = 35.h;
+    final double leftReserved = 20.w;
+    final double bottomReserved = 25.h;
 
     final dataMin = trader.chartData.reduce((a, b) => a < b ? a : b).toDouble();
     final dataMax = trader.chartData.reduce((a, b) => a > b ? a : b).toDouble();
@@ -65,11 +45,11 @@ class TraderDetailsRoiChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppText(
-                text: 'ROI',
+                text: AppStrings.copyTradingPnl,
                 fontSize: 14.sp,
                 variant: TextVariant.encodeBold,
               ),
-              periodDropdown(),
+              PeriodDropDown(),
             ],
           ),
           addHeight(16.h),
@@ -88,7 +68,7 @@ class TraderDetailsRoiChart extends StatelessWidget {
                       reservedSize: leftReserved,
                       interval: 1,
                       getTitlesWidget: (value, meta) {
-                        final label = "${value.toInt()}%";
+                        final label = "${value.toInt()}K";
                         return SizedBox(
                           width: leftReserved,
                           child: Align(

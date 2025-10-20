@@ -26,6 +26,9 @@ String yellowUpwardBar = 'yellow_upward_bar'.svg;
 String greenChart = 'green_chart'.svg;
 String biometrics = 'biometrics'.svg;
 String info = 'info'.svg;
+String upwardGreenArrow = 'upward_green_arrow'.svg;
+String bitCoinIcon = 'bitcoin_icon'.svg;
+String newProBadge = 'new_pro_badge'.svg;
 
 //PNG
 String crown = 'crown'.png;

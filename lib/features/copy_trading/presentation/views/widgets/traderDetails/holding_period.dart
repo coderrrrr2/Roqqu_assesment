@@ -107,7 +107,7 @@ class TraderDetailsHoldingPeriodWidget extends StatelessWidget {
                               text: '${(value / 1000).toInt()}k',
                               fontSize: 11.sp,
                               variant: TextVariant.interRegular,
-                              color: AppColors.grey.withOpacity(0.7),
+                              color: AppColors.grey.withValues(alpha: 0.7),
                             ),
                           ),
                     ),
@@ -127,7 +127,7 @@ class TraderDetailsHoldingPeriodWidget extends StatelessWidget {
                               text: labels[idx],
                               fontSize: 11.sp,
                               variant: TextVariant.interRegular,
-                              color: AppColors.grey.withOpacity(0.7),
+                              color: AppColors.grey.withValues(alpha: 0.7),
                             ),
                           );
                         }

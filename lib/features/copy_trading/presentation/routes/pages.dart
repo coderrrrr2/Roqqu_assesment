@@ -8,6 +8,7 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/views/info_vi
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/enter_amount_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/risk_level_selection_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/trading_details_view.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/user_dashboard.dart';
 
 List<GetPage> copyTradingPages = [
   GetPage(
@@ -62,6 +63,12 @@ List<GetPage> copyTradingPages = [
         () => CopyTradeSuccessView(
           args: Get.arguments as CopyTradeSuccessViewArgs,
         ),
+    transition: Transition.native,
+    transitionDuration: const Duration(milliseconds: 500),
+  ),
+  GetPage(
+    name: CopyTradingRoutes.userDashBoard,
+    page: () => UserDashboardView(args: Get.arguments as UserDashboardViewArgs),
     transition: Transition.native,
     transitionDuration: const Duration(milliseconds: 500),
   ),

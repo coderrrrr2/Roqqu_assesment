@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class AppSpacing {
   static double get horizontalValue => 16.w;
   static double get verticalValue => 20.h;
+  static double get smallVerticalValue => 8.h;
+
   static double get largeVerticalValue => 24.h;
 
   static EdgeInsets get screen => EdgeInsets.symmetric(

@@ -7,6 +7,7 @@ import 'package:roqqu_assesment/features/copy_trading/data/models/pro_trader.dar
 import 'package:roqqu_assesment/features/copy_trading/presentation/routes/routes.dart';
 import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/bottom_button_placer.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class CopyTradeSuccessViewArgs {
@@ -21,11 +22,11 @@ class CopyTradeSuccessView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: SafeArea(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -48,34 +49,14 @@ class CopyTradeSuccessView extends HookWidget {
                 ],
               ),
             ),
-
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.grey6,
-                border: Border(
-                  top: BorderSide(color: AppColors.grey3, width: 1.r),
-                ),
-              ),
-              child: SafeArea(
-                top: false,
-                child: Padding(
-                  padding: EdgeInsets.all(16.w),
-                  child: AppButton(
-                    borderRadius: BorderRadius.circular(8.r),
-                    onPressed: () {
-                      AppNavigator.pushRoute(
-                        CopyTradingRoutes.copyTradingDashboard,
-                      );
-                    },
-                    text: AppStrings.goToDashBoard,
-                    maxButtonSize: Size(double.infinity, 48.h),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+          BottomButtonPlacer(
+            onPressed: () {
+              AppNavigator.pushRoute(CopyTradingRoutes.copyTradingDashboard);
+            },
+            text: AppStrings.goToDashBoard,
+          ),
+        ],
       ),
     );
   }

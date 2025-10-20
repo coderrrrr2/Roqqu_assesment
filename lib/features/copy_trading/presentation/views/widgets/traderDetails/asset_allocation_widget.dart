@@ -91,17 +91,6 @@ class TraderDetailsAssetAllocationWidget extends StatelessWidget {
                           }).toList(),
                     ),
                   ),
-
-                  Positioned.fill(
-                    child: CircularProgressIndicator(
-                      value: topAsset.value / 100,
-                      strokeWidth: 8.r,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.yellow,
-                      ),
-                      backgroundColor: AppColors.lightyYellow,
-                    ),
-                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

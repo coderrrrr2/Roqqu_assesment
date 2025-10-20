@@ -199,7 +199,7 @@ class AppTextField extends HookWidget {
                 filled: true,
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: borderColor ?? AppColors.white,
+                    color: borderColor ?? AppColors.grey3,
                     width: borderWidth ?? 0.5,
                   ),
                   borderRadius: borderRadius ?? BorderRadius.circular(30.r),

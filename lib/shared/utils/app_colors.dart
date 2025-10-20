@@ -6,11 +6,8 @@ class AppColors {
   static const rosePink = Color.fromRGBO(221, 86, 141, 1);
   static const lightBlack = Color.fromRGBO(41, 40, 40, 0.612);
   static const opaqueBlack = Color.fromRGBO(0, 0, 0, 0.4);
-
   static const black = Color.fromRGBO(28, 33, 39, 1);
-
   static const white = Color.fromARGB(255, 255, 255, 255);
-
   static const red = Color.fromRGBO(255, 42, 84, 1.0);
   static const red2 = Color.fromRGBO(255, 85, 74, 0.08);
   static const backgroundColor = Color(0xFF1C2127);
@@ -23,7 +20,6 @@ class AppColors {
   static const grey6 = Color.fromRGBO(32, 37, 43, 1);
   static const grey7 = Color.fromRGBO(167, 177, 188, 0.08);
   static const grey8 = Color.fromRGBO(42, 47, 54, 1);
-
   static const skyBlue = Color.fromRGBO(133, 209, 240, 1);
   static const skyBlue2 = Color.fromRGBO(171, 226, 243, 1);
   static const mintTeal = Color.fromRGBO(189, 228, 229, 1);

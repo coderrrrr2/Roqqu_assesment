@@ -17,7 +17,6 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets
 import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
-import 'package:roqqu_assesment/shared/utils/string_utils.dart';
 
 class TradingDetailsViewArgs {
   final ProTrader trader;

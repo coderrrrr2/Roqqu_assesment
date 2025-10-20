@@ -7,4 +7,5 @@ class CopyTradingRoutes {
   static const String confirmTransaction = '/confirmTransactionView';
   static const String confirmPin = '/confirmPinView';
   static const String copyTradeSuccess = '/copyTradeSuccessView';
+  static const String userDashBoard = '/userDashBoardView';
 }

@@ -9,6 +9,7 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_pg_two.dart';
 import 'package:roqqu_assesment/features/navigation/navigation.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/bottom_button_placer.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class CopyTradingInfoView extends HookWidget {
@@ -83,28 +84,11 @@ class CopyTradingInfoView extends HookWidget {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.grey6,
-              border: Border(
-                top: BorderSide(color: AppColors.grey3, width: 1.r),
-              ),
-            ),
-            child: SafeArea(
-              top: false,
-              child: Padding(
-                padding: EdgeInsets.all(16.w),
-                child: AppButton(
-                  borderRadius: BorderRadius.circular(8.r),
-                  onPressed: () {
-                    AppNavigator.pushRoute(CopyTradingRoutes.riskLevel);
-                  },
-                  text: AppStrings.getStarted,
-                  maxButtonSize: Size(double.infinity, 48.h),
-                ),
-              ),
-            ),
+          BottomButtonPlacer(
+            onPressed: () {
+              AppNavigator.pushRoute(CopyTradingRoutes.riskLevel);
+            },
+            text: AppStrings.getStarted,
           ),
         ],
       ),

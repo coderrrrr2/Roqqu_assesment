@@ -14,16 +14,16 @@ class TraderDetailsHoldingPeriodWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 8.w,
-          height: 8.w,
+          width: 10.w,
+          height: 10.w,
           decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
-        addWidth(6.w),
+        addWidth(8.w),
         AppText(
           text: label,
-          fontSize: 12.sp,
+          fontSize: 14.sp,
           variant: TextVariant.interRegular,
-          color: AppColors.grey,
+          color: AppColors.white,
         ),
       ],
     );
@@ -74,42 +74,61 @@ class TraderDetailsHoldingPeriodWidget extends StatelessWidget {
               ),
             ],
           ),
-          addHeight(16.h),
+          addHeight(24.h),
           SizedBox(
-            height: 150.h,
+            height: 180.h,
             child: ScatterChart(
               ScatterChartData(
                 scatterSpots:
-                    trader.holdingPeriods.map((e) {
-                      return ScatterSpot(e['x']!, e['y']!);
+                    trader.holdingPeriods.asMap().entries.map((entry) {
+                      final e = entry.value;
+                      final isProfit = e['type'] == 1;
+                      return ScatterSpot(
+                        e['x']!,
+                        e['y']!,
+                        dotPainter: FlDotCirclePainter(
+                          radius: 6.r,
+                          color:
+                              isProfit ? Color(0xFF4CAF50) : Color(0xFFFF4444),
+                        ),
+                      );
                     }).toList(),
 
                 titlesData: FlTitlesData(
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 40.w,
+                      reservedSize: 45.w,
+                      interval: 100,
                       getTitlesWidget:
-                          (value, meta) => AppText(
-                            text: '${(value / 1000).toInt()}k',
-                            fontSize: 10.sp,
-                            variant: TextVariant.interRegular,
-                            color: AppColors.grey,
+                          (value, meta) => Padding(
+                            padding: EdgeInsets.only(right: 8.w),
+                            child: AppText(
+                              text: '${(value / 1000).toInt()}k',
+                              fontSize: 11.sp,
+                              variant: TextVariant.interRegular,
+                              color: AppColors.grey.withOpacity(0.7),
+                            ),
                           ),
                     ),
                   ),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
+                      reservedSize: 30.h,
+                      interval: 1,
                       getTitlesWidget: (value, meta) {
                         final labels = ['1m', '24h', '5d', '15d'];
-                        if (value.toInt() >= 0 &&
-                            value.toInt() < labels.length) {
-                          return AppText(
-                            text: labels[value.toInt()],
-                            fontSize: 10.sp,
-                            variant: TextVariant.interRegular,
-                            color: AppColors.grey,
+                        final idx = value.toInt();
+                        if (idx >= 0 && idx < labels.length) {
+                          return Padding(
+                            padding: EdgeInsets.only(top: 8.h),
+                            child: AppText(
+                              text: labels[idx],
+                              fontSize: 11.sp,
+                              variant: TextVariant.interRegular,
+                              color: AppColors.grey.withOpacity(0.7),
+                            ),
                           );
                         }
                         return const SizedBox.shrink();
@@ -123,22 +142,25 @@ class TraderDetailsHoldingPeriodWidget extends StatelessWidget {
                     sideTitles: SideTitles(showTitles: false),
                   ),
                 ),
+                clipData: FlClipData.all(),
+
                 borderData: FlBorderData(show: false),
                 gridData: FlGridData(show: false),
-                minY: 64000,
-                maxY: 64400,
-                minX: 0,
-                maxX: 4,
+                scatterTouchData: ScatterTouchData(enabled: false),
+                minY: 64000 - 100, // add padding
+                maxY: 64400 + 90,
+                minX: -0.2,
+                maxX: 3.2,
               ),
             ),
           ),
-          addHeight(16.h),
+          addHeight(20.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              legendItem('Profit', AppColors.successGreen),
-              addWidth(24.w),
-              legendItem('Loss', const Color(0xFFFF4444)),
+              legendItem('Profit', Color(0xFF4CAF50)),
+              addWidth(32.w),
+              legendItem('Loss', Color(0xFFFF4444)),
             ],
           ),
         ],

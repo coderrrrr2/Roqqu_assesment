@@ -6,14 +6,14 @@ import 'package:roqqu_assesment/features/copy_trading/data/models/pro_trader.dar
 import 'package:roqqu_assesment/features/copy_trading/presentation/routes/routes.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/enter_amount_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_app_bar.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_warning_bottom_sheet.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/warning_bottom_sheet.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/risk_involved_bottom_sheet.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trader_details_asset_allocation_widget.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trader_details_certified_badge.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trader_details_chart.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trader_details_holding_period.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trader_details_roi_chart.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/trader_details_tabs.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/asset_allocation_widget.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/certified_badge.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/details_chart.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/holding_period.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/roi_chart.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/traderDetails/tabs.dart';
 import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
@@ -41,89 +41,105 @@ class _TradingDetailsViewState extends State<TradingDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CopyTradingAppBar(title: 'Trading Details', showBackButton: true),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.horizontalValue),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            traderProfile(widget.args.trader),
-            addHeight(16.h),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                statItem('${widget.args.trader.tradingDays} trading days'),
-                statItem('${widget.args.trader.profitShare}% profit-share'),
-                statItem('${widget.args.trader.totalOrders} total orders'),
-              ],
-            ),
+      body: Column(
+        children: [
+          addHeight(17.h),
+          CopyTradingAppBar(title: 'Trading Details', showBackButton: true),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSpacing.horizontalValue,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  addHeight(25.h),
+                  traderProfile(widget.args.trader),
+                  addHeight(20.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      statItem(
+                        '${widget.args.trader.tradingDays} trading days',
+                      ),
+                      statItem(
+                        '${widget.args.trader.profitShare}% profit-share',
+                      ),
+                      statItem(
+                        '${widget.args.trader.totalOrders} total orders',
+                      ),
+                    ],
+                  ),
 
-            addHeight(16.h),
+                  addHeight(16.h),
 
-            TraderDetailsCertifiedBadge(
-              isCertified: widget.args.trader.isCertified,
-              certifications: widget.args.trader.certifications,
-            ),
-            addHeight(5.h),
+                  TraderDetailsCertifiedBadge(
+                    isCertified: widget.args.trader.isCertified,
+                    certifications: widget.args.trader.certifications,
+                  ),
+                  addHeight(5.h),
 
-            TraderDetailsTabs(
-              selectedIndex: selectedTabIndex,
-              onTabSelected: (index) {
-                setState(() => selectedTabIndex = index);
-              },
-            ),
+                  TraderDetailsTabs(
+                    selectedIndex: selectedTabIndex,
+                    onTabSelected: (index) {
+                      setState(() => selectedTabIndex = index);
+                    },
+                  ),
 
-            TraderDetailsRoiChart(
-              trader: widget.args.trader,
-              selectedPeriod: selectedPeriod,
-            ),
-            addHeight(10.h),
+                  TraderDetailsRoiChart(
+                    trader: widget.args.trader,
+                    selectedPeriod: selectedPeriod,
+                  ),
+                  addHeight(10.h),
 
-            AppButton(
-              borderRadius: BorderRadius.circular(8.r),
+                  AppButton(
+                    borderRadius: BorderRadius.circular(8.r),
 
-              onPressed: () {
-                AppAlert.showCustomBottomSheet(
-                  context: context,
-                  content: CopyTradeWarningBottomSheet(
-                    onProceed: () {
+                    onPressed: () {
                       AppAlert.showCustomBottomSheet(
                         context: context,
-                        content: RisksInvolvedBottomSheet(
-                          onConfirm: () {
-                            AppNavigator.pushRoute(
-                              CopyTradingRoutes.enterAmount,
-                              arguments: EnterAmountViewArgs(
-                                trader: widget.args.trader,
+                        content: CopyTradeWarningBottomSheet(
+                          onProceed: () {
+                            AppAlert.showCustomBottomSheet(
+                              context: context,
+                              content: RisksInvolvedBottomSheet(
+                                onConfirm: () {
+                                  AppNavigator.pushRoute(
+                                    CopyTradingRoutes.enterAmount,
+                                    arguments: EnterAmountViewArgs(
+                                      trader: widget.args.trader,
+                                    ),
+                                  );
+                                },
                               ),
                             );
                           },
                         ),
                       );
                     },
+                    text: 'Copy trade',
+                    buttonSize: Size(double.infinity, 48.h),
+                    textSize: 16.sp,
                   ),
-                );
-              },
-              text: 'Copy trade',
-              buttonSize: Size(double.infinity, 48.h),
-              textSize: 16.sp,
+                  addHeight(10.h),
+
+                  TraderDetailsChart(trader: widget.args.trader),
+                  addHeight(5.h),
+
+                  TraderDetailsAssetAllocationWidget(
+                    selectedPeriod: selectedPeriod,
+                    trader: widget.args.trader,
+                  ),
+                  addHeight(5.h),
+
+                  TraderDetailsHoldingPeriodWidget(trader: widget.args.trader),
+                  addHeight(40.h),
+                ],
+              ),
             ),
-            addHeight(10.h),
-
-            TraderDetailsChart(trader: widget.args.trader),
-            addHeight(5.h),
-
-            TraderDetailsAssetAllocationWidget(
-              selectedPeriod: selectedPeriod,
-              trader: widget.args.trader,
-            ),
-            addHeight(5.h),
-
-            TraderDetailsHoldingPeriodWidget(trader: widget.args.trader),
-            addHeight(40.h),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

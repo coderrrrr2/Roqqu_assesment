@@ -36,6 +36,8 @@ class AppColors {
   static const opaqueYellow = Color.fromRGBO(222, 155, 9, 0.08);
   static const yellow = Color.fromRGBO(247, 144, 9, 1);
   static const lightyYellow = Color.fromRGBO(247, 144, 9, 0.08);
+  static const lightYellow2 = Color.fromRGBO(255, 255, 255, 0.4);
+  static const yellow2 = Color.fromRGBO(247, 147, 26, 1);
   static const skyBlue3 = Color.fromRGBO(133, 209, 240, 1);
   static const successGreen = Color.fromRGBO(23, 178, 106, 1);
   static const lightSuccessGreen = Color.fromRGBO(23, 178, 106, 0.08);
@@ -44,7 +46,6 @@ class AppColors {
   static const lightPink = Color.fromRGBO(249, 216, 229, 1);
 
   static Color getRandomColor(String key) {
-    // Define a palette of visually distinct colors.
     const List<Color> palette = [
       Color(0xFFFFB800), // Amber
       Color(0xFF4CAF50), // Green
@@ -55,8 +56,6 @@ class AppColors {
       Color(0xFF00BCD4), // Cyan
       Color(0xFFFF9800), // Orange
     ];
-
-    // Use a hash of the key to pick a color index deterministically
     final int index = key.hashCode.abs() % palette.length;
     return palette[index];
   }

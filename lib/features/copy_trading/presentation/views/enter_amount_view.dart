@@ -51,12 +51,21 @@ class EnterAmountView extends HookWidget {
           ),
           centerTitle: true,
           actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 16.w),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+              decoration: BoxDecoration(
+                color: AppColors.grey4,
+                borderRadius: BorderRadius.circular(100.r),
+              ),
               child: Row(
                 children: [
-                  ImageAsset(usFlag, width: 24.w, height: 24.w),
-                  addWidth(4.w),
+                  ImageAsset(
+                    usFlag,
+                    width: 20.w,
+                    height: 20.w,
+                    fit: BoxFit.cover,
+                  ),
+                  addWidth(5.w),
                   AppText(
                     text: selectedCurrency.value,
                     fontSize: 14.sp,
@@ -66,6 +75,7 @@ class EnterAmountView extends HookWidget {
                     Icons.keyboard_arrow_down,
                     color: AppColors.white,
                     size: 20.sp,
+                    weight: 20.sp,
                   ),
                 ],
               ),
@@ -97,9 +107,9 @@ class EnterAmountView extends HookWidget {
               ),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.end,
             ),
-
+            addWidth(8.w),
             Padding(
               padding: EdgeInsets.only(top: 12.h),
               child: AppText(

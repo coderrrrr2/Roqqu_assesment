@@ -5,7 +5,7 @@ import 'package:roqqu_assesment/core/constants/strings.dart' show AppStrings;
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/mock.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_app_bar.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_dashboard_card.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/dashboard_card.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/pro_trader_item.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
@@ -17,10 +17,13 @@ class CopyTradingDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: CopyTradingAppBar(),
       body: CustomScrollView(
         slivers: [
-          // Dashboard Cards
+          SliverToBoxAdapter(
+            child: Column(
+              children: [addHeight(17.h), CopyTradingAppBar(), addHeight(17.h)],
+            ),
+          ),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -55,7 +58,7 @@ class CopyTradingDashboard extends StatelessWidget {
                       end: Alignment.bottomRight,
                     ),
                   ),
-                  addWidth(12.w), // Space for the last card's margin
+                  addWidth(12.w),
                 ],
               ),
             ),

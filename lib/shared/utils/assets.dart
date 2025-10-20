@@ -25,6 +25,7 @@ String verified = 'verified'.svg;
 String yellowUpwardBar = 'yellow_upward_bar'.svg;
 String greenChart = 'green_chart'.svg;
 String biometrics = 'biometrics'.svg;
+String info = 'info'.svg;
 
 //PNG
 String crown = 'crown'.png;

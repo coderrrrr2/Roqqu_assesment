@@ -10,6 +10,7 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/risk_profile_card.dart';
 import 'package:roqqu_assesment/features/navigation/app_navigator.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/bottom_button_placer.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class RiskLevelSelectionView extends HookWidget {
@@ -38,12 +39,13 @@ class RiskLevelSelectionView extends HookWidget {
     ];
 
     return Scaffold(
-      appBar: CopyTradingAppBar(),
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          addHeight(42.h),
+          addHeight(17.h),
+
+          CopyTradingAppBar(),
+          addHeight(33.h),
 
           Padding(
             padding: EdgeInsets.symmetric(
@@ -68,11 +70,10 @@ class RiskLevelSelectionView extends HookWidget {
               variant: TextVariant.interRegular,
             ),
           ),
-
-          addHeight(32.h),
-
+          addHeight(24.h),
           Expanded(
             child: ListView.separated(
+              padding: EdgeInsets.zero,
               itemCount: riskProfiles.length,
               separatorBuilder: (context, index) => addHeight(24.h),
               itemBuilder: (context, index) {
@@ -88,32 +89,11 @@ class RiskLevelSelectionView extends HookWidget {
             ),
           ),
 
-          // Footer Container with Button
-          Container(
-            width: double.infinity,
-            height: 112.h,
-            decoration: BoxDecoration(
-              color: AppColors.grey6,
-              border: Border(
-                top: BorderSide(color: AppColors.grey3, width: 1.r),
-              ),
-            ),
-            child: SafeArea(
-              top: false,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-                child: AppButton(
-                  borderRadius: BorderRadius.circular(8.r),
-                  onPressed: () {
-                    AppNavigator.pushRoute(
-                      CopyTradingRoutes.copyTradingDashboard,
-                    );
-                  },
-                  text: AppStrings.proceed,
-                  maxButtonSize: Size(double.infinity, 48.h),
-                ),
-              ),
-            ),
+          BottomButtonPlacer(
+            onPressed: () {
+              AppNavigator.pushRoute(CopyTradingRoutes.copyTradingDashboard);
+            },
+            text: AppStrings.proceed,
           ),
         ],
       ),

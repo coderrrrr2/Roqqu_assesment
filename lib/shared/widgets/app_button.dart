@@ -53,7 +53,7 @@ class _AppButtonState extends State<AppButton> {
                       const Color.fromRGBO(120, 71, 225, 1),
                       const Color.fromRGBO(221, 86, 141, 1),
                     ]
-                    .map((c) => widget.isEnabled ? c : c.withOpacity(0.4))
+                    .map((c) => widget.isEnabled ? c : c.withValues(alpha: 0.4))
                     .toList(),
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

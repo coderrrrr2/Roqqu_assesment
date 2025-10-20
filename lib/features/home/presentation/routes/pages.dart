@@ -1,6 +1,6 @@
 import 'package:get/route_manager.dart';
 import 'package:roqqu_assesment/features/home/presentation/routes/routes.dart';
-import 'package:roqqu_assesment/features/home/presentation/views/dashboard_base.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/home_base.dart';
 
 List<GetPage> homePages = [
   GetPage(

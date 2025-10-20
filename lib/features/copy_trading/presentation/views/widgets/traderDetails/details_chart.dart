@@ -13,6 +13,21 @@ class TraderDetailsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double leftReserved = 50.w;
+    final double bottomReserved = 35.h;
+
+    final chartData =
+        trader.chartData
+            .asMap()
+            .entries
+            .map((e) => FlSpot(e.key.toDouble(), 64000 + (e.value - 120) * 100))
+            .toList();
+
+    final dataMin = chartData.map((e) => e.y).reduce((a, b) => a < b ? a : b);
+    final dataMax = chartData.map((e) => e.y).reduce((a, b) => a > b ? a : b);
+    final minY = dataMin - 100;
+    final maxY = dataMax + 100;
+
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
@@ -27,24 +42,35 @@ class TraderDetailsChart extends StatelessWidget {
         height: 150.h,
         child: LineChart(
           LineChartData(
+            clipData: FlClipData.all(),
             gridData: FlGridData(show: false),
             titlesData: FlTitlesData(
               leftTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
-                  reservedSize: 40.w,
-                  getTitlesWidget:
-                      (value, meta) => AppText(
-                        text: '${(value / 1000).toInt()}k',
-                        fontSize: 10.sp,
-                        variant: TextVariant.interRegular,
-                        color: AppColors.grey,
+                  reservedSize: leftReserved,
+                  interval: 100,
+                  getTitlesWidget: (value, meta) {
+                    return SizedBox(
+                      width: leftReserved,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: AppText(
+                          text: '${(value / 1000).toInt()}k',
+                          fontSize: 12.sp,
+                          variant: TextVariant.interRegular,
+                          color: AppColors.grey,
+                        ),
                       ),
+                    );
+                  },
                 ),
               ),
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
+                  reservedSize: bottomReserved,
+                  interval: 1,
                   getTitlesWidget: (value, meta) {
                     final dates = [
                       '03-23',
@@ -54,12 +80,16 @@ class TraderDetailsChart extends StatelessWidget {
                       '03-27',
                       '03-28',
                     ];
-                    if (value.toInt() >= 0 && value.toInt() < dates.length) {
-                      return AppText(
-                        text: dates[value.toInt()],
-                        fontSize: 10.sp,
-                        variant: TextVariant.interRegular,
-                        color: AppColors.grey,
+                    final idx = value.toInt();
+                    if (idx >= 0 && idx < dates.length) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: 8.h),
+                        child: AppText(
+                          text: dates[idx],
+                          fontSize: 12.sp,
+                          variant: TextVariant.interRegular,
+                          color: AppColors.grey,
+                        ),
                       );
                     }
                     return const SizedBox.shrink();
@@ -74,34 +104,29 @@ class TraderDetailsChart extends StatelessWidget {
             borderData: FlBorderData(show: false),
             lineBarsData: [
               LineChartBarData(
-                spots:
-                    trader.chartData
-                        .asMap()
-                        .entries
-                        .map(
-                          (e) => FlSpot(
-                            e.key.toDouble(),
-                            64000 + (e.value - 120) * 100,
-                          ),
-                        )
-                        .toList(),
+                spots: chartData,
                 isCurved: true,
-                color: AppColors.successGreen,
-                barWidth: 3.r,
+                curveSmoothness: 0.4,
+                color: Color(0xFF4CAF50),
+                barWidth: 2.5.r,
                 dotData: FlDotData(show: false),
                 belowBarData: BarAreaData(
                   show: true,
                   gradient: LinearGradient(
                     colors: [
-                      AppColors.successGreen.withValues(alpha: 0.3),
-                      AppColors.successGreen.withValues(alpha: 0.0),
+                      AppColors.successGreen.withValues(alpha: 0.4),
+                      AppColors.successGreen.withValues(alpha: 0.2),
+                      AppColors.successGreen.withValues(alpha: 0),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
+                    stops: [0.0, 0.5, 1.0],
                   ),
                 ),
               ),
             ],
+            minY: minY,
+            maxY: maxY,
           ),
         ),
       ),

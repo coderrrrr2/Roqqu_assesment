@@ -26,7 +26,7 @@ class ProTraderItem extends StatelessWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
+        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
         decoration: BoxDecoration(
           color: AppColors.backgroundColor,
           borderRadius: BorderRadius.circular(12.r),
@@ -133,9 +133,9 @@ class ProTraderItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  addHeight(5.h),
+                  addHeight(15.h),
                   divider(color: AppColors.grey3),
-                  addHeight(10.h),
+                  addHeight(15.h),
 
                   Row(
                     children: [
@@ -168,7 +168,7 @@ class ProTraderItem extends StatelessWidget {
                               addWidth(5.w),
                               AppText(
                                 text:
-                                    '${AppStrings.dollarSign}${trader.totalPnl}',
+                                    '${AppStrings.dollarSign}${StringUtils.formatToCommas(trader.totalPnl.toString())}',
                                 fontSize: 12.sp,
                                 variant: TextVariant.encodeBold,
                                 color: AppColors.white,
@@ -191,9 +191,17 @@ class ProTraderItem extends StatelessWidget {
                             ),
                           );
                         },
-                        child: SizedBox(
-                          width: 120.w,
-                          height: 80.h,
+                        child: Container(
+                          width: 132.w,
+                          height: 51.h,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1E2631),
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 6.w,
+                            vertical: 4.h,
+                          ),
                           child: LineChart(
                             LineChartData(
                               gridData: const FlGridData(show: false),
@@ -213,20 +221,23 @@ class ProTraderItem extends StatelessWidget {
                                           )
                                           .toList(),
                                   isCurved: true,
+                                  curveSmoothness: 0.35,
                                   color: AppColors.successGreen,
                                   belowBarData: BarAreaData(
                                     show: true,
                                     gradient: LinearGradient(
                                       colors: [
-                                        AppColors.successGreen.withAlpha(100),
-                                        AppColors.successGreen..withAlpha(400),
+                                        AppColors.black,
+                                        AppColors.successGreen.withValues(
+                                          alpha: 0.3,
+                                        ),
                                       ],
                                       begin: Alignment.bottomCenter,
                                       end: Alignment.topCenter,
                                     ),
                                   ),
                                   dotData: const FlDotData(show: false),
-                                  barWidth: 3.r, // Increased from 2.r to 3.r
+                                  barWidth: 2.5.r,
                                 ),
                               ],
                               minY: 0,
@@ -266,15 +277,19 @@ class ProTraderItem extends StatelessWidget {
                       Spacer(),
                       Row(
                         children: [
+                          SvgImage(info),
+                          addWidth(4.w),
                           AppText(
-                            text: AppStrings.winRate,
+                            text: AppStrings.aum,
                             color: AppColors.grey,
                             fontSize: 12.sp,
                             variant: TextVariant.interRegular,
                           ),
                           addWidth(8.w),
                           AppText(
-                            text: '${trader.winRate}%',
+                            text: StringUtils.formatToCommas(
+                              trader.aum.toString(),
+                            ),
                             fontSize: 12.sp,
                             variant: TextVariant.encodeBold,
                           ),

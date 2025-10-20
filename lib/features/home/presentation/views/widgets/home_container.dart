@@ -5,15 +5,15 @@ import 'package:roqqu_assesment/core/constants/app_spacing.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
 import 'package:roqqu_assesment/features/home/presentation/views/widgets/balance_text.dart';
-import 'package:roqqu_assesment/features/home/presentation/views/widgets/copy_trading_banner.dart';
-import 'package:roqqu_assesment/features/home/presentation/views/widgets/dashboard_action_panel.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/home_copy_trading_banner.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/home_action_panel.dart';
 import 'package:roqqu_assesment/features/home/presentation/views/widgets/stay_updated_tile.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class DashboardContainer extends HookWidget {
-  const DashboardContainer({super.key});
+class HomeContainer extends HookWidget {
+  const HomeContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,6 @@ class DashboardContainer extends HookWidget {
     return Container(
       constraints: BoxConstraints(minHeight: 0.7.sh),
 
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSpacing.horizontalValue,
-        vertical: AppSpacing.largeVerticalValue,
-      ),
       margin: EdgeInsets.only(top: 24.h),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -36,6 +32,10 @@ class DashboardContainer extends HookWidget {
         ),
       ),
       child: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.horizontalValue,
+          vertical: AppSpacing.largeVerticalValue,
+        ),
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

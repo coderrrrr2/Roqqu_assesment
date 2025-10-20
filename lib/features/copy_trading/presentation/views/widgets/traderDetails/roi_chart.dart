@@ -40,11 +40,9 @@ class TraderDetailsRoiChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // tweak this value to perfectly line up the bottom axis with the left label column
-    final double leftReserved = 56.w;
-    final double bottomReserved = 30.h;
+    final double leftReserved = 50.w;
+    final double bottomReserved = 35.h;
 
-    // compute min/max from chartData (with a small padding)
     final dataMin = trader.chartData.reduce((a, b) => a < b ? a : b).toDouble();
     final dataMax = trader.chartData.reduce((a, b) => a > b ? a : b).toDouble();
     final minY = dataMin - 1.0;
@@ -63,7 +61,6 @@ class TraderDetailsRoiChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -77,24 +74,13 @@ class TraderDetailsRoiChart extends StatelessWidget {
           ),
           addHeight(16.h),
 
-          /// Chart
           SizedBox(
             height: 200.h,
             child: LineChart(
               LineChartData(
                 clipData: FlClipData.all(),
-                gridData: FlGridData(
-                  show: true,
-                  drawVerticalLine: false,
-                  horizontalInterval: 1,
-                  getDrawingHorizontalLine:
-                      (value) => FlLine(
-                        color: AppColors.grey3.withValues(alpha: 0.22),
-                        strokeWidth: 1,
-                      ),
-                ),
+                gridData: FlGridData(show: false),
 
-                /// TITLES
                 titlesData: FlTitlesData(
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
@@ -102,32 +88,17 @@ class TraderDetailsRoiChart extends StatelessWidget {
                       reservedSize: leftReserved,
                       interval: 1,
                       getTitlesWidget: (value, meta) {
-                        // Left label + small grey tick bar aligned into reserved area
                         final label = "${value.toInt()}%";
                         return SizedBox(
                           width: leftReserved,
-                          child: Row(
-                            children: [
-                              // Label (left aligned inside reserved area)
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: AppText(
-                                    text: label,
-                                    fontSize: 10.sp,
-                                    variant: TextVariant.interRegular,
-                                    color: AppColors.grey,
-                                  ),
-                                ),
-                              ),
-                              // The short grey "tick" / bar (appears right next to label)
-                              Container(
-                                width: 20.w,
-                                height: 1,
-                                margin: EdgeInsets.only(left: 6.w),
-                                color: AppColors.grey3.withValues(alpha: 0.35),
-                              ),
-                            ],
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: AppText(
+                              text: label,
+                              fontSize: 12.sp,
+                              variant: TextVariant.interRegular,
+                              color: AppColors.grey,
+                            ),
                           ),
                         );
                       },
@@ -141,11 +112,14 @@ class TraderDetailsRoiChart extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         final idx = value.toInt();
                         if (idx >= 0 && idx < trader.chartDates.length) {
-                          return AppText(
-                            text: trader.chartDates[idx],
-                            fontSize: 10.sp,
-                            variant: TextVariant.interRegular,
-                            color: AppColors.grey,
+                          return Padding(
+                            padding: EdgeInsets.only(top: 8.h),
+                            child: AppText(
+                              text: trader.chartDates[idx],
+                              fontSize: 12.sp,
+                              variant: TextVariant.interRegular,
+                              color: AppColors.grey,
+                            ),
                           );
                         }
                         return const SizedBox.shrink();
@@ -162,7 +136,6 @@ class TraderDetailsRoiChart extends StatelessWidget {
 
                 borderData: FlBorderData(show: false),
 
-                /// DATA LINE
                 lineBarsData: [
                   LineChartBarData(
                     spots:
@@ -175,18 +148,21 @@ class TraderDetailsRoiChart extends StatelessWidget {
                             )
                             .toList(),
                     isCurved: true,
-                    color: AppColors.successGreen,
-                    barWidth: 3.r,
+                    curveSmoothness: 0.4,
+                    color: Color(0xFF4CAF50),
+                    barWidth: 2.5.r,
                     dotData: FlDotData(show: false),
                     belowBarData: BarAreaData(
                       show: true,
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.successGreen.withValues(alpha: 0.28),
-                          AppColors.successGreen.withValues(alpha: 0.0),
+                          AppColors.successGreen.withValues(alpha: 0.4),
+                          AppColors.successGreen.withValues(alpha: 0.2),
+                          AppColors.successGreen.withValues(alpha: 0),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
+                        stops: [0.0, 0.5, 1.0],
                       ),
                     ),
                   ),

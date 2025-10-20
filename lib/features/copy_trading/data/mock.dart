@@ -20,7 +20,7 @@ final List<ProTrader> mockTraders = [
     name: "Jay Isisou",
     initials: "JI",
     avatarColorHex: "4CAF50",
-    roi: 120.42,
+    roi: 110.42,
     totalPnl: 38667.29,
     winRate: 100,
     aum: 38667.29,
@@ -75,7 +75,7 @@ final List<ProTrader> mockTraders = [
     aum: 45000.00,
     chartData: [122, 123, 124, 125, 126, 127],
     chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
-    assetAllocations: {"BTCUSDT": 80, "ETHUSDT": 15, "BNBUSDT": 5},
+    assetAllocations: {"BTCUSDT": 100},
     holdingPeriods: [
       {"x": 0.5, "y": 64000, "profit": 1},
       {"x": 1.5, "y": 64100, "profit": 1},

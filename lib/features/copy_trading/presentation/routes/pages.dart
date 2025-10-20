@@ -3,10 +3,10 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/routes/routes
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/confirm_pin_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/confirm_transaction_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/copy_trade_success_view.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/copy_trading_dashboard.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/copy_trading_info_view.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/dashboard.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/info_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/enter_amount_view.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/risk_selection_view.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/views/risk_level_selection_view.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/trading_details_view.dart';
 
 List<GetPage> copyTradingPages = [

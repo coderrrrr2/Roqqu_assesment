@@ -1,31 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/core/constants/app_spacing.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
+import 'package:roqqu_assesment/features/copy_trading/data/models/binance_ticker_dto.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/pro_trader.dart';
+import 'package:roqqu_assesment/features/copy_trading/presentation/viewmodels/stream_vm.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
-class CoinSection extends StatelessWidget {
+class CoinSection extends HookConsumerWidget {
   final ProTrader trader;
   const CoinSection({super.key, required this.trader});
 
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.zero,
-      itemBuilder: (context, index) {
-        final trade = trader.tradingHistory[index];
-        return section(trade);
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch the shared ticker data once for the entire list
+    final tickersAsync = ref.watch(sharedTickerProvider);
+
+    return tickersAsync.when(
+      data: (tickers) {
+        return ListView.builder(
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            final trade = trader.tradingHistory[index];
+            final symbol = "BTCUSDT";
+            final ticker = tickers[symbol];
+
+            return section(trade, ticker);
+          },
+          itemCount: trader.tradingHistory.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+        );
       },
-      itemCount: trader.tradingHistory.length,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      loading:
+          () => ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              final trade = trader.tradingHistory[index];
+              return section(trade, null);
+            },
+            itemCount: trader.tradingHistory.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+          ),
+      error:
+          (e, _) => ListView.builder(
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              final trade = trader.tradingHistory[index];
+              return section(trade, null);
+            },
+            itemCount: trader.tradingHistory.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+          ),
     );
   }
 
-  Widget section(TradingHistory history) {
+  Widget section(TradingHistory history, TickerDTO? ticker) {
+    final changeColor =
+        (ticker?.priceChangePercent ?? 0) >= 0
+            ? AppColors.successGreen
+            : AppColors.red;
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppSpacing.smallVerticalValue),
       child: Column(
@@ -40,31 +80,29 @@ class CoinSection extends StatelessWidget {
               children: [
                 SvgImage(bitCoinIcon, width: 20.w, height: 20.w),
                 addWidth(8.w),
-                Row(
-                  children: [
-                    AppText(
-                      text: AppStrings.btc,
-                      fontSize: 14.sp,
-                      variant: TextVariant.interRegular,
-                    ),
-                    AppText(
-                      text: AppStrings.tenX,
-                      fontSize: 14.sp,
-                      variant: TextVariant.interRegular,
-                      color: AppColors.skyBlue,
-                    ),
-                  ],
+                AppText(
+                  text: 'BTCUSDT',
+                  fontSize: 14.sp,
+                  variant: TextVariant.interRegular,
+                ),
+                addWidth(8.w),
+                AppText(
+                  text: '${ticker?.lastPrice ?? '--'}',
+                  fontSize: 14.sp,
+                  variant: TextVariant.interBold,
                 ),
                 Spacer(),
                 AppText(
-                  text: '+${trader.roi} ${AppStrings.roi}',
+                  text:
+                      '${ticker?.priceChangePercent.toStringAsFixed(2) ?? '--'}%',
                   fontSize: 14.sp,
                   variant: TextVariant.interBold,
-                  color: AppColors.successGreen,
+                  color: changeColor,
                 ),
               ],
             ),
           ),
+          // Details Section
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
@@ -79,14 +117,11 @@ class CoinSection extends StatelessWidget {
                   history.entryPrice.toString(),
                 ),
                 _buildTile(AppStrings.exitPrice, history.exitPrice.toString()),
-
                 _buildTile(
                   AppStrings.proTraderAmount,
                   '${history.proTraderAmount} USDT',
                 ),
-
                 _buildTile(AppStrings.entryTime, '${history.entryTime}PM'),
-
                 _buildTile(AppStrings.exitTime, '${history.exitTime}PM'),
               ],
             ),
@@ -115,7 +150,6 @@ class CoinSection extends StatelessWidget {
           addWidth(8.w),
           AppText(
             text: trailing,
-
             fontSize: 14.sp,
             variant: TextVariant.interBold,
             color: isProTraderLine ? AppColors.skyBlue : AppColors.white,

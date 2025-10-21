@@ -1,62 +1,92 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:web_socket_channel/web_socket_channel.dart';
+
+import 'package:roqqu_assesment/core/network/websocket/network_state.dart';
+import 'package:roqqu_assesment/core/network/websocket/socket_connection.dart';
 
 class BinanceSocketClient {
-  WebSocketChannel? _channel;
-  StreamController<dynamic>? _controller;
-  Timer? _pingTimer;
-  bool _closing = false;
+  final Map<String, SocketConnection> _connections = {};
+  final _connectionStateController =
+      StreamController<Map<String, ConnectionState>>.broadcast();
 
-  Stream<dynamic> connectSingle(String path) {
-    final uri = Uri.parse('wss://stream.binance.com:9443$path');
+  Stream<Map<String, ConnectionState>> get connectionStates =>
+      _connectionStateController.stream;
 
-    _controller?.close();
-    _controller = StreamController.broadcast(onCancel: _dispose);
-    _closing = false;
-
-    void open() {
-      _channel = WebSocketChannel.connect(uri);
-      _channel!.stream.listen(
-        (event) => _controller?.add(jsonDecode(event)),
-        onError: (e, st) => _scheduleReconnect(open),
-        onDone: () {
-          if (!_closing) _scheduleReconnect(open);
-        },
-        cancelOnError: false,
-      );
-
-      _pingTimer?.cancel();
-      _pingTimer = Timer.periodic(const Duration(seconds: 15), (_) {
-        try {
-          _channel?.sink.add(jsonEncode({"method": "PING"}));
-        } catch (_) {}
-      });
+  Stream<Map<String, dynamic>> connectSingle(String path) {
+    if (_connections.containsKey(path)) {
+      return _connections[path]!.stream;
     }
 
-    open();
-    return _controller!.stream;
+    final uri = Uri.parse('wss://stream.binance.com:9443$path');
+    final connection = SocketConnection(
+      uri: uri,
+      onStateChange: () => _notifyStateChange(),
+    );
+
+    _connections[path] = connection;
+    _notifyStateChange();
+
+    return connection.stream;
   }
 
-  void _scheduleReconnect(void Function() reopen) {
-    _pingTimer?.cancel();
-    var delay = _lastDelay = (_lastDelay * 2).clamp(1000, 30000);
-    Future.delayed(Duration(milliseconds: delay), () {
-      if (!_closing) reopen();
-    });
+  Stream<Map<String, dynamic>> connectMultiple(List<String> streams) {
+    final combinedPath = '/stream?streams=${streams.join('/')}';
+    return connectSingle(combinedPath);
   }
 
-  int _lastDelay = 500;
-
-  void _dispose() {
-    _closing = true;
-    _pingTimer?.cancel();
-    _channel?.sink.close();
-    _channel = null;
-    _controller?.close();
-    _controller = null;
-    _lastDelay = 500;
+  void closeConnection(String path) {
+    final connection = _connections.remove(path);
+    connection?.dispose();
+    _notifyStateChange();
   }
 
-  void close() => _dispose();
+  void closeAll() {
+    for (final connection in _connections.values) {
+      connection.dispose();
+    }
+    _connections.clear();
+    _notifyStateChange();
+  }
+
+  ConnectionState? getConnectionState(String path) {
+    return _connections[path]?.state;
+  }
+
+  void _notifyStateChange() {
+    final states = <String, ConnectionState>{};
+    for (final entry in _connections.entries) {
+      states[entry.key] = entry.value.state;
+    }
+    if (!_connectionStateController.isClosed) {
+      _connectionStateController.add(states);
+    }
+  }
+
+  void dispose() {
+    closeAll();
+    _connectionStateController.close();
+  }
+}
+
+extension BinanceStreams on BinanceSocketClient {
+  Stream<Map<String, dynamic>> ticker(String symbol) {
+    return connectSingle('/ws/${symbol.toLowerCase()}@ticker');
+  }
+
+  Stream<Map<String, dynamic>> trades(String symbol) {
+    return connectSingle('/ws/${symbol.toLowerCase()}@trade');
+  }
+
+  Stream<Map<String, dynamic>> klines(String symbol, String interval) {
+    return connectSingle('/ws/${symbol.toLowerCase()}@kline_$interval');
+  }
+
+  Stream<Map<String, dynamic>> depth(String symbol, {String? speed}) {
+    final speedSuffix = speed != null ? '@${speed}ms' : '';
+    return connectSingle('/ws/${symbol.toLowerCase()}@depth$speedSuffix');
+  }
+
+  Stream<Map<String, dynamic>> multiTicker(List<String> symbols) {
+    final streams = symbols.map((s) => '${s.toLowerCase()}@ticker').toList();
+    return connectMultiple(streams);
+  }
 }

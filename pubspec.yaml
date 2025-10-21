@@ -32,6 +32,7 @@ dependencies:
   google_fonts: ^6.3.2
   smooth_page_indicator: ^1.2.1
   fl_chart: ^1.1.0
+  web_socket_channel: ^3.0.3
 dependency_overrides:
   vector_math: 2.2.0
 

@@ -29,7 +29,6 @@ class TradingDetailsChartTab extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // ROI chart remains static (performance summary)
           TraderDetailsRoiChart(trader: trader),
           addHeight(10.h),
 

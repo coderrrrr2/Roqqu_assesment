@@ -34,7 +34,6 @@ final tradePriceProvider = StreamProvider.family
 final tickerProvider = StreamProvider.family<TickerDTO, String>((ref, symbol) {
   final repo = ref.watch(marketRepoProvider);
 
-  // Keep alive while any widget is using it
   ref.keepAlive();
 
   return repo.tickerStream(symbol);

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:roqqu_assesment/features/copy_trading/data/models/binace_trade_dto.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/binance_ticker_dto.dart';
 
@@ -25,7 +24,6 @@ class BinanceMarketStreamRepository implements MarketStreamRepository {
     final path = '/ws/${symbol.toLowerCase()}@miniTicker';
     final raw = _client.connectSingle(path);
     return raw.map((e) {
-      log('ticker triggered $e');
       return TickerDTO.fromJson(e);
     });
   }

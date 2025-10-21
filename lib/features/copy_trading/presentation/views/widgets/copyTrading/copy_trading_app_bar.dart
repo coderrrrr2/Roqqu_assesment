@@ -12,6 +12,7 @@ class CopyTradingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final double? elevation;
+  final bool isBackButtonPadded;
 
   const CopyTradingAppBar({
     super.key,
@@ -21,17 +22,19 @@ class CopyTradingAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.iconColor,
     this.elevation = 0,
+    this.isBackButtonPadded = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      forceMaterialTransparency: true,
       backgroundColor: backgroundColor ?? Colors.transparent,
       elevation: elevation,
       leading:
           showBackButton
               ? Padding(
-                padding: EdgeInsets.only(left: 8.w),
+                padding: EdgeInsets.only(left: isBackButtonPadded ? 8.w : 0),
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

@@ -77,6 +77,11 @@ class AppText extends StatelessWidget {
           textStyle: baseStyle.copyWith(fontWeight: FontWeight.w700),
         );
         break;
+      case TextVariant.encodeExtraRegular:
+        baseStyle = GoogleFonts.encodeSans(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w500),
+        );
+        break;
       case TextVariant.encodeRegular:
         baseStyle = GoogleFonts.encodeSans(
           textStyle: baseStyle.copyWith(fontWeight: FontWeight.w400),
@@ -92,7 +97,7 @@ class AppText extends StatelessWidget {
           textStyle: baseStyle.copyWith(fontWeight: FontWeight.w400),
         );
         break;
-      case TextVariant.interMedium:
+      case TextVariant.interBold:
         baseStyle = GoogleFonts.inter(
           textStyle: baseStyle.copyWith(fontWeight: FontWeight.w500),
         );

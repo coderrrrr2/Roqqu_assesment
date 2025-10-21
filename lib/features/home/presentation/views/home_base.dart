@@ -4,11 +4,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:roqqu_assesment/core/constants/strings.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/dashboard_view.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/more_for_you_overlay.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/home_view.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/more_for_you_overlay.dart';
 import 'package:roqqu_assesment/features/navigation/nav_bar_viewmodel.dart';
 import 'package:roqqu_assesment/shared/utils/app_colors.dart';
 import 'package:roqqu_assesment/shared/utils/assets.dart';
+import 'package:roqqu_assesment/shared/widgets/shared_widgets.dart';
 
 class DashboardBase extends HookConsumerWidget {
   const DashboardBase({super.key});
@@ -17,7 +18,6 @@ class DashboardBase extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final navState = ref.watch(navBarProvider);
     final navBarIndex = navState.currentIndex;
-    final isNavbarShown = navState.isNavbarShown;
     final showOverlay = useState(false);
 
     useEffect(() {
@@ -30,12 +30,7 @@ class DashboardBase extends HookConsumerWidget {
         children: [
           IndexedStack(
             index: navBarIndex == 4 ? 0 : navBarIndex,
-            children: const [
-              DashboardView(),
-              DashboardView(),
-              DashboardView(),
-              DashboardView(),
-            ],
+            children: const [HomeView(), HomeView(), HomeView(), HomeView()],
           ),
 
           Align(
@@ -50,69 +45,63 @@ class DashboardBase extends HookConsumerWidget {
           ),
         ],
       ),
-      bottomNavigationBar:
-          isNavbarShown
-              ? Stack(
-                alignment: Alignment.bottomCenter,
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.backgroundColor.withAlpha(100),
+      bottomNavigationBar: Stack(
+        alignment: Alignment.bottomCenter,
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.backgroundColor.withValues(alpha: 0.2),
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: 15.h,
+                  bottom: 8.h,
+                  left: 16.w,
+                  right: 16.w,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildNavItem(
+                      homeIcon,
+                      AppStrings.home,
+                      0,
+                      navBarIndex,
+                      ref,
                     ),
-                    child: SafeArea(
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: 20.h,
-                          bottom: 8.h,
-                          left: 16.w,
-                          right: 16.w,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _buildNavItem(
-                              homeIcon,
-                              AppStrings.home,
-                              0,
-                              navBarIndex,
-                              ref,
-                            ),
-                            _buildNavItem(
-                              walletIcon,
-                              AppStrings.wallet,
-                              1,
-                              navBarIndex,
-                              ref,
-                            ),
-                            SizedBox(width: 56.w),
-                            _buildNavItem(
-                              historyIcon,
-                              AppStrings.history,
-                              2,
-                              navBarIndex,
-                              ref,
-                            ),
-                            _buildNavItem(
-                              profileIcon,
-                              AppStrings.profile,
-                              3,
-                              navBarIndex,
-                              ref,
-                            ),
-                          ],
-                        ),
-                      ),
+                    _buildNavItem(
+                      walletIcon,
+                      AppStrings.wallet,
+                      1,
+                      navBarIndex,
+                      ref,
                     ),
-                  ),
+                    addWidth(56.w),
+                    _buildNavItem(
+                      historyIcon,
+                      AppStrings.history,
+                      2,
+                      navBarIndex,
+                      ref,
+                    ),
+                    _buildNavItem(
+                      profileIcon,
+                      AppStrings.profile,
+                      3,
+                      navBarIndex,
+                      ref,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
 
-                  Positioned(
-                    bottom: 47.h,
-                    child: _buildCenterButton(showOverlay),
-                  ),
-                ],
-              )
-              : const SizedBox.shrink(key: ValueKey('hidden_nav')),
+          Positioned(bottom: 45.h, child: _buildCenterButton(showOverlay)),
+        ],
+      ),
     );
   }
 

@@ -8,7 +8,9 @@ import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_pg_one.dart';
 import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/copyTrading/copy_trading_pg_two.dart';
 import 'package:roqqu_assesment/features/navigation/navigation.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/bottom_button_placer.dart';
+import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class CopyTradingInfoView extends HookWidget {
   const CopyTradingInfoView({super.key});
@@ -19,11 +21,13 @@ class CopyTradingInfoView extends HookWidget {
     final currentPage = useState(0);
 
     return Scaffold(
-      appBar: CopyTradingAppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          addHeight(42.h),
+          addHeight(17.h),
+
+          CopyTradingAppBar(),
+          addHeight(33.h),
 
           Row(
             children: [
@@ -80,26 +84,11 @@ class CopyTradingInfoView extends HookWidget {
               ),
             ),
           ),
-          Container(
-            height: 112.h,
-
-            decoration: BoxDecoration(
-              color: AppColors.grey6,
-              border: Border.all(color: AppColors.grey3, width: 1.r),
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                child: AppButton(
-                  borderRadius: BorderRadius.circular(8.r),
-                  onPressed: () {
-                    AppNavigator.pushRoute(CopyTradingRoutes.riskLevel);
-                  },
-                  text: AppStrings.getStarted,
-                  maxButtonSize: Size(358.w, 48.h),
-                ),
-              ),
-            ),
+          BottomButtonPlacer(
+            onPressed: () {
+              AppNavigator.pushRoute(CopyTradingRoutes.riskLevel);
+            },
+            text: AppStrings.getStarted,
           ),
         ],
       ),

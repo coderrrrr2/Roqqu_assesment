@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/dashboard_container.dart';
-import 'package:roqqu_assesment/features/copy_trading/presentation/views/widgets/dashboard/dashboard_header.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/home_container.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/home_header.dart';
 import 'package:roqqu_assesment/shared/utils/app_colors.dart';
 
-class DashboardView extends StatelessWidget {
-  const DashboardView({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class DashboardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: const [
               DashboardHeader(),
-              Expanded(child: DashboardContainer()),
+              Expanded(child: HomeContainer()),
             ],
           ),
         ),

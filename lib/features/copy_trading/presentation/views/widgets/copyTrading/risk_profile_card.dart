@@ -45,8 +45,8 @@ class RiskProfileCard extends StatelessWidget {
                   ).copyWith(top: 16.h),
                   child: AppText(
                     text: profile.title,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp,
+                    variant: TextVariant.encodeBold,
                   ),
                 ),
                 addHeight(8.h),

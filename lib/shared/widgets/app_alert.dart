@@ -166,10 +166,10 @@ class AppAlert {
     }
   }
 
-  static Future<void> showModalBottomSheet({
+  static Future<void> showCustomBottomSheet({
     required BuildContext context,
     String? title,
-    Widget? content,
+    required Widget content,
     List<Widget>? actions,
     String? confirmText,
     String? cancelText,
@@ -177,28 +177,24 @@ class AppAlert {
     VoidCallback? onCancel,
     VoidCallback? onDismiss,
     bool barrierDismissible = true,
+    bool showDragHandle = true,
     Color backgroundColor = Colors.black,
     BorderRadiusGeometry borderRadius = const BorderRadius.only(
       topLeft: Radius.circular(20),
       topRight: Radius.circular(20),
     ),
     bool enableDrag = true,
-    bool isScrollControlled = false,
+    bool isScrollControlled = true,
   }) async {
     await showModalBottomSheet(
+      // showDragHandle: showDragHandle,
       context: context,
-      barrierDismissible: barrierDismissible,
+      isDismissible: barrierDismissible,
       enableDrag: enableDrag,
       isScrollControlled: isScrollControlled,
       backgroundColor: backgroundColor,
 
-      content: Container(
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: borderRadius,
-        ),
-        child: content,
-      ),
+      builder: (context) => content,
     );
   }
 }

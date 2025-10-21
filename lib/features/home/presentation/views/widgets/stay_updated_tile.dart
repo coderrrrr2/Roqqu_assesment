@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
-import 'package:roqqu_assesment/shared/shared.dart';
+import 'package:roqqu_assesment/shared/utils/utils.dart';
+import 'package:roqqu_assesment/shared/widgets/widgets.dart';
 
 class StayUpdatedTile extends StatelessWidget {
   final String title;

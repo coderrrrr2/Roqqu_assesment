@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:roqqu_assesment/shared/utils/app_colors.dart';
+
+import 'package:google_fonts/google_fonts.dart';
+import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
+
+import '../utils/app_colors.dart';
 
 class AppText extends StatelessWidget {
   final String text;
+  final TextVariant variant;
   final TextStyle? style;
   final bool isItalic;
   final Color? color;
@@ -21,14 +26,17 @@ class AppText extends StatelessWidget {
   final TextHeightBehavior? textHeightBehavior;
   final StrutStyle? strutStyle;
   final Color? decorationColor;
+  final double? height;
 
   const AppText({
     super.key,
     required this.text,
-    this.isItalic = false,
+    this.variant = TextVariant.interRegular,
     this.style,
-
-    this.decorationColor,
+    this.isItalic = false,
+    this.color,
+    this.fontWeight,
+    this.fontSize,
     this.textAlign,
     this.textDirection,
     this.locale,
@@ -39,30 +47,71 @@ class AppText extends StatelessWidget {
     this.textWidthBasis,
     this.textHeightBehavior,
     this.strutStyle,
-    this.fontSize,
-    this.fontWeight,
-    this.color,
     this.decoration,
+    this.decorationColor,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    TextStyle baseStyle = theme.textTheme.displaySmall!.copyWith(
+      height: height,
+      decoration: decoration,
+      decorationColor: decorationColor ?? AppColors.white,
+      color: color ?? Colors.white,
+      fontStyle: isItalic ? FontStyle.italic : FontStyle.normal,
+      fontSize: fontSize ?? 14.sp,
+      fontWeight: fontWeight ?? FontWeight.w400,
+    );
+
+    // override with chosen variant
+    switch (variant) {
+      case TextVariant.encodeExtraBold:
+        baseStyle = GoogleFonts.encodeSansExpanded(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w700),
+        );
+      case TextVariant.encodeBold:
+        baseStyle = GoogleFonts.encodeSans(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w700),
+        );
+        break;
+      case TextVariant.encodeExtraRegular:
+        baseStyle = GoogleFonts.encodeSans(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w500),
+        );
+        break;
+      case TextVariant.encodeRegular:
+        baseStyle = GoogleFonts.encodeSans(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w400),
+        );
+        break;
+      case TextVariant.encodeSemiBold:
+        baseStyle = GoogleFonts.encodeSans(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w600),
+        );
+        break;
+      case TextVariant.interRegular:
+        baseStyle = GoogleFonts.inter(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w400),
+        );
+        break;
+      case TextVariant.interBold:
+        baseStyle = GoogleFonts.inter(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w500),
+        );
+        break;
+      case TextVariant.interLight:
+        baseStyle = GoogleFonts.inter(
+          textStyle: baseStyle.copyWith(fontWeight: FontWeight.w300),
+        );
+        break;
+    }
+
     return Text(
       text,
-      style:
-          style ??
-          theme.textTheme.displaySmall!.copyWith(
-            decorationColor:
-                decorationColor ?? AppColors.white, // Set the underline color
-
-            decoration: decoration,
-            color: color ?? Colors.white,
-            fontStyle: isItalic ? FontStyle.italic : FontStyle.normal,
-            fontSize: fontSize ?? 14.sp,
-            fontWeight: fontWeight ?? FontWeight.w400,
-          ),
+      style: style ?? baseStyle,
       textAlign: textAlign,
       textDirection: textDirection,
       locale: locale,

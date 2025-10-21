@@ -5,6 +5,9 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:roqqu_assesment/core/utils/theme.dart';
 import 'package:roqqu_assesment/features/navigation/app_pages.dart';
 
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
+
 class App extends HookWidget {
   const App({super.key});
 
@@ -13,9 +16,10 @@ class App extends HookWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       child: GetMaterialApp(
+        navigatorObservers: [routeObserver],
         debugShowCheckedModeBanner: false,
         theme: theme,
-        // initialRoute: AppPages.initialRoute,
+        initialRoute: AppPages.initialRoute,
         getPages: AppPages.pages,
       ),
     );

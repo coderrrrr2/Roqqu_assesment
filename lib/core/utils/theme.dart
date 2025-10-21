@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:roqqu_assesment/shared/utils/app_colors.dart';
 
-final colorScheme = ColorScheme.fromSeed(seedColor: AppColors.backgroundColor);
+final colorScheme = ColorScheme.fromSeed(
+  seedColor: AppColors.backgroundColor,
+  brightness: Brightness.dark,
+);
 
 final theme = ThemeData(
+  brightness: Brightness.dark,
   colorScheme: colorScheme.copyWith(
     primary: AppColors.backgroundColor,
     onPrimary: Colors.white,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:roqqu_assesment/core/network/websocket/binance_socket_client.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/binace_trade_dto.dart';
+import 'package:roqqu_assesment/features/copy_trading/data/models/binance_miniticker_dto.dart';
 import 'package:roqqu_assesment/features/copy_trading/data/models/binance_ticker_dto.dart';
 import 'package:roqqu_assesment/features/copy_trading/domain/repositories/market_stream_repository.dart';
 import 'package:roqqu_assesment/features/copy_trading/domain/services/market_stream_repository_imp.dart';
@@ -68,6 +69,26 @@ final sharedTickerProvider = StreamProvider.autoDispose<Map<String, TickerDTO>>(
     return controller.stream;
   },
 );
+
+final allMiniTickersProvider = StreamProvider.autoDispose<List<MiniTickerDTO>>((
+  ref,
+) {
+  final repo = ref.watch(marketRepoProvider);
+  final buffer = <MiniTickerDTO>[];
+
+  return repo
+      .allMiniTickersStream()
+      .map((e) {
+        final idx = buffer.indexWhere((x) => x.symbol == e.symbol);
+        if (idx >= 0) {
+          buffer[idx] = e;
+        } else {
+          buffer.add(e);
+        }
+        return List<MiniTickerDTO>.unmodifiable(buffer);
+      })
+      .transform(_throttle(const Duration(seconds: 2)));
+});
 
 StreamTransformer<T, T> _throttle<T>(Duration d) {
   Timer? last;

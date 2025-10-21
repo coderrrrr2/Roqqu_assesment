@@ -44,4 +44,72 @@ class StringUtils {
 
     return value;
   }
+
+  static String coinName(String symbol) {
+    final s = symbol.toUpperCase().replaceAll('USDT', '');
+    const names = {
+      'BTC': 'Bitcoin',
+      'ETH': 'Ethereum',
+      'BNB': 'BNB',
+      'SOL': 'Solana',
+      'SUSHI': 'Sushi',
+      'ADA': 'Cardano',
+      'XRP': 'XRP',
+      'DOGE': 'Dogecoin',
+      'MATIC': 'Polygon',
+      'DOT': 'Polkadot',
+      'AVAX': 'Avalanche',
+      'LTC': 'Litecoin',
+      'TRX': 'TRON',
+      'UNI': 'Uniswap',
+      'LINK': 'Chainlink',
+      'ATOM': 'Cosmos',
+      'AAVE': 'Aave',
+      'FTM': 'Fantom',
+      'NEAR': 'Near Protocol',
+      'SHIB': 'Shiba Inu',
+      'APE': 'ApeCoin',
+      'FIL': 'Filecoin',
+      'INJ': 'Injective',
+      'OP': 'Optimism',
+      'ARB': 'Arbitrum',
+      'RUNE': 'THORChain',
+      'SAND': 'The Sandbox',
+      'AXS': 'Axie Infinity',
+      'EGLD': 'MultiversX',
+      'RNDR': 'Render Token',
+    };
+    return names[s] ?? s;
+  }
+
+  static String coinIconUrl(String symbol) {
+    const Map<String, String> iconNameExceptions = {
+      'BCH': 'bch-sv',
+      'ETC': 'eth-classic',
+      'XLM': 'stellar',
+      'MIOTA': 'iota',
+      'IOTX': 'iotx',
+      'DOGE': 'dogecoin',
+      'FIL': 'filecoin',
+      'XMR': 'monero',
+      'DOT': 'polkadot',
+      'UNI': 'uniswap',
+      'BNB': 'binance-coin',
+      'SYRUP': 'syrup',
+      'SOPH': 'soph',
+      'BRL': 'brl',
+    };
+
+    final baseSymbol = symbol.toUpperCase().replaceAll('USDT', '');
+
+    String iconName;
+
+    if (iconNameExceptions.containsKey(baseSymbol)) {
+      iconName = iconNameExceptions[baseSymbol]!;
+    } else {
+      iconName = baseSymbol.toLowerCase();
+    }
+
+    return 'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/$iconName.png';
+  }
 }

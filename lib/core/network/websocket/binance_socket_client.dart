@@ -17,9 +17,13 @@ class BinanceSocketClient {
     }
 
     final uri = Uri.parse('wss://stream.binance.com:9443$path');
+
+    final isBinanceStream = path.startsWith('/ws/!') || path.contains('@');
+
     final connection = SocketConnection(
       uri: uri,
       onStateChange: () => _notifyStateChange(),
+      autoPing: !isBinanceStream,
     );
 
     _connections[path] = connection;

@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 class SocketConnection {
   final Uri uri;
   final VoidCallback onStateChange;
+  final bool autoPing;
 
   final _controller = StreamController<Map<String, dynamic>>.broadcast();
   WebSocketChannel? _channel;
@@ -25,7 +26,11 @@ class SocketConnection {
   static const _pingInterval = Duration(seconds: 15);
   static const _connectionTimeout = Duration(seconds: 10);
 
-  SocketConnection({required this.uri, required this.onStateChange}) {
+  SocketConnection({
+    required this.uri,
+    required this.onStateChange,
+    this.autoPing = true,
+  }) {
     _connect();
   }
 
@@ -67,7 +72,9 @@ class SocketConnection {
         cancelOnError: false,
       );
 
-      _startPingTimer();
+      if (autoPing) {
+        _startPingTimer();
+      }
     } catch (e, stackTrace) {
       debugPrint('[$uri] Connection error: $e');
       debugPrint('Stack trace: $stackTrace');
@@ -76,22 +83,24 @@ class SocketConnection {
   }
 
   void _onMessage(dynamic message) {
-    // Successfully received message - connection is healthy
     if (_state != ConnectionState.connected) {
       _setState(ConnectionState.connected);
       _reconnectAttempts = 0;
-      _reconnectDelay = 1000; // Reset backoff
+      _reconnectDelay = 1000;
       debugPrint('[$uri] Connected successfully');
     }
 
     try {
       final decoded = jsonDecode(message);
-      if (decoded is Map<String, dynamic>) {
-        // Filter out ping/pong messages
-        if (decoded['method'] != null) return;
 
-        if (!_controller.isClosed) {
+      if (!_controller.isClosed) {
+        if (decoded is Map<String, dynamic>) {
+          // Filter out ping/pong or unknown methods
+          if (decoded['method'] != null) return;
           _controller.add(decoded);
+        } else if (decoded is List) {
+          // ✅ handle array payloads (like !miniTicker@arr)
+          _controller.add({'data': decoded});
         }
       }
     } catch (e) {

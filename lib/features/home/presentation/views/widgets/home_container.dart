@@ -7,6 +7,7 @@ import 'package:roqqu_assesment/features/copy_trading/data/enums.dart';
 import 'package:roqqu_assesment/features/home/presentation/views/widgets/balance_text.dart';
 import 'package:roqqu_assesment/features/home/presentation/views/widgets/home_copy_trading_banner.dart';
 import 'package:roqqu_assesment/features/home/presentation/views/widgets/home_action_panel.dart';
+import 'package:roqqu_assesment/features/home/presentation/views/widgets/list_coins_section.dart';
 import 'package:roqqu_assesment/features/home/presentation/views/widgets/stay_updated_tile.dart';
 import 'package:roqqu_assesment/shared/utils/utils.dart';
 import 'package:roqqu_assesment/shared/widgets/widgets.dart';
@@ -130,6 +131,7 @@ class HomeContainer extends HookWidget {
                 ],
               ),
             ),
+            ListCoinsSection(),
           ],
         ),
       ),

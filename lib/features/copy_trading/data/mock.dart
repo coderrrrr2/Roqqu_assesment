@@ -26,7 +26,7 @@ final List<ProTrader> mockTraders = [
     aum: 38667.29,
     chartData: [120, 121, 123, 122, 124, 126],
     chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
-    assetAllocations: {"BTCUSDT": 70, "ETHUSDT": 20, "SOLUSDT": 10},
+    assetAllocations: {"BTCUSDT": 100},
     holdingPeriods: [
       {"x": 0.5, "y": 64200, "profit": 1},
       {"x": 1.5, "y": 64100, "profit": 0},
@@ -104,7 +104,7 @@ final List<ProTrader> mockTraders = [
     aum: 32000.00,
     chartData: [118, 119, 117, 118.5, 119.5, 120],
     chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
-    assetAllocations: {"BTCUSDT": 60, "ETHUSDT": 30, "ADAUSDT": 10},
+    assetAllocations: {"BTCUSDT": 100},
     holdingPeriods: [
       {"x": 0.5, "y": 64150, "profit": 1},
       {"x": 1.5, "y": 64000, "profit": 0},
@@ -229,7 +229,7 @@ final List<ProTrader> mockTraders = [
     aum: 38000.00,
     chartData: [115, 116, 115.5, 116.5, 117, 118],
     chartDates: ['03-23', '03-24', '03-25', '03-26', '03-27', '03-28'],
-    assetAllocations: {"BTCUSDT": 50, "ETHUSDT": 30, "XRPUSDT": 20},
+    assetAllocations: {"BTCUSDT": 100},
     holdingPeriods: [
       {"x": 0.8, "y": 64100, "profit": 1},
       {"x": 1.8, "y": 64200, "profit": 1},

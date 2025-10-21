@@ -13,8 +13,8 @@ class TraderDetailsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double leftReserved = 50.w;
-    final double bottomReserved = 35.h;
+    final double leftReserved = 45.w;
+    final double bottomReserved = 30.h;
 
     final chartData =
         trader.chartData
@@ -39,7 +39,7 @@ class TraderDetailsChart extends StatelessWidget {
         border: Border.all(color: AppColors.grey3, width: 1.r),
       ),
       child: SizedBox(
-        height: 150.h,
+        height: 200.h,
         child: LineChart(
           LineChartData(
             clipData: FlClipData.all(),
@@ -83,7 +83,7 @@ class TraderDetailsChart extends StatelessWidget {
                     final idx = value.toInt();
                     if (idx >= 0 && idx < dates.length) {
                       return Padding(
-                        padding: EdgeInsets.only(top: 8.h),
+                        padding: EdgeInsets.only(top: 15.h),
                         child: AppText(
                           text: dates[idx],
                           fontSize: 12.sp,

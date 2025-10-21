@@ -119,7 +119,14 @@ class ConfirmPinView extends HookWidget {
                     border: Border.all(color: AppColors.grey3, width: 1.r),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
-                  child: SvgImage(biometrics, color: AppColors.white),
+                  child: Center(
+                    child: SvgImage(
+                      biometrics,
+                      color: AppColors.white,
+                      width: 24.w,
+                      height: 24.w,
+                    ),
+                  ),
                 ),
               ],
             ),

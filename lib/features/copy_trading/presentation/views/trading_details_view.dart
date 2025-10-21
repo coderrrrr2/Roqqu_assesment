@@ -48,7 +48,7 @@ class _TradingDetailsViewState extends State<TradingDetailsView> {
                 showBackButton: true,
                 isBackButtonPadded: false,
               ),
-              addHeight(25.h),
+              addHeight(20.h),
               traderProfile(widget.args.trader),
               addHeight(22.h),
               Row(

@@ -20,8 +20,8 @@ class UserDashboardPnlChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double leftReserved = 20.w;
-    final double bottomReserved = 25.h;
+    final double leftReserved = 45.w;
+    final double bottomReserved = 30.h;
 
     final dataMin = trader.chartData.reduce((a, b) => a < b ? a : b).toDouble();
     final dataMax = trader.chartData.reduce((a, b) => a > b ? a : b).toDouble();

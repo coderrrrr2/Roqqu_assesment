@@ -52,7 +52,9 @@ class CopyTradeSuccessView extends HookWidget {
           ),
           BottomButtonPlacer(
             onPressed: () {
-              AppNavigator.pushRoute(CopyTradingRoutes.copyTradingDashboard);
+              AppNavigator.popUntilRoute(
+                CopyTradingRoutes.copyTradingDashboard,
+              );
             },
             text: AppStrings.goToDashBoard,
           ),

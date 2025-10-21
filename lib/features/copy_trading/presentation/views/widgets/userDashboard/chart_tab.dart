@@ -22,7 +22,7 @@ class ChartTab extends StatelessWidget {
             selectedPeriod: AppStrings.selectedPeriod,
           ),
           addHeight(5.h),
-          TradingHistorySection(trader: trader),
+          TradingHistorySection(trader: trader, showHeader: false),
         ],
       ),
     );

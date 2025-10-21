@@ -77,7 +77,6 @@ class ConfirmTransactionView extends HookWidget {
                   ),
                   addHeight(8.h),
 
-                  // Amount
                   AppText(
                     text: '$amount USD',
                     fontSize: 24.sp,

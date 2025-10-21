@@ -104,14 +104,15 @@ class CoinSection extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AppText(
             text: header,
             fontSize: 14.sp,
             variant: TextVariant.interRegular,
           ),
-
+          Spacer(),
+          if (isProTraderLine) ImageAsset(avatar, width: 24.w, height: 24.w),
+          addWidth(8.w),
           AppText(
             text: trailing,
 

@@ -15,7 +15,7 @@ class App extends HookWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
-        // initialRoute: AppPages.initialRoute,
+        initialRoute: AppPages.initialRoute,
         getPages: AppPages.pages,
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:roqqu_assesment/shared/utils/app_colors.dart';
 
 Widget addHeight(double height) {
   return SizedBox(height: height);
@@ -27,4 +28,8 @@ String formatBalance(int amount) {
 
 bool isLargeScreen(context) {
   return getScreenWidth(context) > 600;
+}
+
+Widget divider({double thickness = 1, Color? color}) {
+  return Divider(color: color ?? AppColors.black, thickness: 1, height: 1);
 }
